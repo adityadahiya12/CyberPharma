@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MediCare+ - Your Cyberpunk Pharmacy for a Healthier Tomorrow">
+  <title>MediCare+ Pharmacy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* Your original CSS, kept intact but extended where needed */
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: #0a0f2c;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      position: fixed;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+    header h1 {
+      color: #00f9ff;
+      font-size: 2rem;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      color: #ff00c8;
+    }
+    section {
+      padding: 100px 50px;
+      text-align: center;
+    }
+    .hero {
+      background: url('https://images.unsplash.com/photo-1581090700227-1fe6ef7c2466?fit=crop&w=1950&q=80') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 2px 2px 5px #000;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      color: #00f9ff;
+    }
+    .hero p {
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+    .btn {
+      margin-top: 30px;
+      padding: 10px 30px;
+      background: #ff00c8;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #00f9ff;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 50px;
+    }
+    .card {
+      background: #111542;
+      border-radius: 15px;
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00f9ff;
+    }
+    .card i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #ff00c8;
+    }
+    footer {
+      padding: 20px;
+      background: #080c22;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>MediCare+</h1>
+  <nav>
+    <a href="Home.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h2>Welcome to MediCare+</h2>
+  <p>Empowering Health in a Digital World</p>
+  <button class="btn">Shop Now</button>
+</section>
+
+<section id="about">
+  <h2>About Our Pharmacy</h2>
+  <p>MediCare+ blends futuristic technologies with compassionate healthcare. From nano-medicines to AI-driven diagnosis, we are your one-stop cyber-pharmacy for a healthier tomorrow.</p>
+</section>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="grid">
+    <div class="card">
+      <i class="fas fa-prescription-bottle"></i>
+      <h3>Prescription Refills</h3>
+      <p>Fast online refills with doorstep drone delivery.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-user-md"></i>
+      <h3>Telemedicine</h3>
+      <p>Consult with certified doctors virtually at your convenience.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-stethoscope"></i>
+      <h3>Health Checkups</h3>
+      <p>Home-based smart health kits for early disease detection.</p>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <h2>Our Products</h2>
+  <div class="grid">
+    <div class="card">
+      <i class="fas fa-pills"></i>
+      <h3>Over-the-Counter Medicines</h3>
+      <p>Shop flu meds, painkillers, and health essentials.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-capsules"></i>
+      <h3>Prescription Drugs</h3>
+      <p>Order prescribed medications safely and securely.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-heartbeat"></i>
+      <h3>Supplements</h3>
+      <p>Boost your immunity with AI-formulated nutraceuticals.</p>
+    </div>
+  </div>
+</section>
+
+<section id="blog">
+  <h2>Health Blog</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Top 5 Immune Boosters for 2025</h3>
+      <p>Discover the latest in futuristic wellness supplements designed for modern living.</p>
+    </div>
+    <div class="card">
+      <h3>How Telemedicine is Changing Healthcare</h3>
+      <p>Explore the rise of AI-powered healthcare consultations and remote diagnosis.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required><br><br>
+    <input type="email" placeholder="Your Email" required><br><br>
+    <textarea placeholder="Your Message" rows="5" required></textarea><br><br>
+    <button class="btn">Send Message</button>
+  </form>
+  <p style="margin-top:20px;">MediCare+ | Cyber Lane, Futurama City | Open Mon-Sat 9AM-9PM</p>
+</section>
+
+<footer>
+  &copy; 2025 MediCare+. All rights reserved.
+</footer>
+
+</body>
+</html>

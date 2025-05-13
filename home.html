@@ -1,0 +1,2473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberPharma | Next-Gen Pharmacy & Telehealth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="/manifest.json">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+            --cyber-purple: #8a2be2;
+            --emergency-red: #ff3a3a;
+        }
+        <!-- Add this to your CSS -->
+    :root {
+    --cyber-glow: 0 0 10px rgba(74, 107, 255, 0.7);
+    --neon-glow: 0 0 15px rgba(0, 245, 212, 0.7);
+}
+
+/* Update hero section with animated gradient */
+    .hero h1 {
+    background: linear-gradient(-45deg, 
+        var(--electric-blue), 
+        var(--neon-cyan),
+        var(--pulse-pink),
+        var(--electric-blue));
+        background-size: 300% 300%;
+        animation: gradientBG 8s ease infinite;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50% }
+        50% { background-position: 100% 50% }
+        100% { background-position: 0% 50% }
+    }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight) 0%, #1a1f4a 100%);
+            color: var(--cyber-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .glow-effect {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-1 { top: -50px; left: -50px; }
+        .glow-2 { bottom: -50px; right: -50px; background: radial-gradient(circle, var(--neon-cyan) 0%, transparent 70%); }
+        .glow-3 { top: 50%; left: 30%; background: radial-gradient(circle, var(--pulse-pink) 0%, transparent 70%); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--cyber-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            color: var(--neon-cyan);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 107, 255, 0.4);
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 107, 255, 0.6);
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: var(--neon-cyan);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 2px solid var(--neon-cyan);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+        }
+
+        .secondary-button:hover {
+            background: rgba(0, 245, 212, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* EMERGENCY BUTTON */
+        .emergency-floating-btn {
+            background: var(--emergency-red);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 0 0 0 rgba(255, 58, 58, 0.7);
+            animation: pulse-emergency 2s infinite;
+            transition: all 0.3s ease;
+            border: none;
+            z-index: 1000;
+        }
+
+        .emergency-floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px 10px rgba(255, 58, 58, 0.4);
+        }
+
+        @keyframes pulse-emergency {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 58, 58, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(255, 58, 58, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 58, 58, 0);
+            }
+        }
+
+        /* EMERGENCY OVERLAY */
+        .emergency-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 58, 58, 0.9);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .emergency-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .emergency-countdown {
+            font-size: 5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .emergency-message {
+            font-size: 2rem;
+            color: white;
+            text-align: center;
+            max-width: 800px;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .emergency-cancel-btn {
+            background: white;
+            color: var(--emergency-red);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .emergency-cancel-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 5rem 0;
+            gap: 3rem;
+            position: relative;
+        }
+
+        .hero-text {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--cyber-white), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(240, 244, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        /* Slideshow Styles */
+        .hero-image {
+          flex: 1;
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          border: 2px solid rgba(138, 158, 255, 0.3);
+        }
+
+        .slideshow-container {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          min-height: 400px;
+        }
+
+        .slide {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          background-position: center;
+          opacity: 0;
+          transition: opacity 1.5s ease-in-out;
+          border-radius: 20px;
+        }
+
+        .slide.active {
+          opacity: 1;
+        }
+
+        .slide::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            to right,
+            rgba(10, 15, 46, 0.5) 0%,
+            transparent 50%,
+            rgba(10, 15, 46, 0.5) 100%
+          );
+        }
+        .search-bar {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+            max-width: 600px;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 245, 212, 0.2);
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            border: none;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.4);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .popular-tags {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease 0.8s forwards;
+            opacity: 0;
+        }
+
+        .popular-tags span {
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .popular-tags a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            background: rgba(0, 245, 212, 0.1);
+            border: 1px solid rgba(0, 245, 212, 0.3);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .popular-tags a:hover {
+            background: rgba(0, 245, 212, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* FEATURES */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 5rem 0;
+        }
+
+        .feature-card {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(0, 245, 212, 0.1) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(74, 107, 255, 0.2);
+            border-color: rgba(138, 158, 255, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--cyber-white);
+        }
+
+        .feature-card p {
+            color: rgba(240, 244, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-link {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .feature-link:hover {
+            color: var(--electric-blue);
+        }
+
+        .feature-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            margin: 5rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--neon-cyan);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: rgba(240, 244, 255, 0.9);
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--neon-cyan);
+            opacity: 0.3;
+            position: absolute;
+            top: -1rem;
+            left: -1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(white);
+        }
+
+        .author-info h4 {
+            color: var(--cyber-white);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: rgba(240, 244, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* NEWSLETTER */
+        .newsletter {
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(0, 245, 212, 0.1) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 5rem 0;
+            text-align: center;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--cyber-white);
+        }
+
+        .newsletter p {
+            color: rgba(240, 244, 255, 0.8);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+        }
+
+        .newsletter-form button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.4);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 3rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: var(--cyber-white);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background: var(--neon-cyan);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: rgba(240, 244, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-column a:hover {
+            color: var(--neon-cyan);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--cyber-white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(138, 158, 255, 0.1);
+            border: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .social-links a:hover {
+            color: var(--neon-cyan);
+            transform: translateY(-3px);
+            background: rgba(0, 245, 212, 0.1);
+            border-color: var(--neon-cyan);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: rgba(240, 244, 255, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: rgba(240, 244, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon-cyan);
+        }
+
+        /* ANIMATIONS */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* FLOATING BUTTONS CONTAINER */
+        .floating-buttons-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        /* CHATBOT STYLES */
+        .chatbot-container {
+            position: relative;
+        }
+
+        .chatbot-toggle {
+            background: linear-gradient(135deg, var(--electric-blue), var(--neon-cyan));
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(74, 107, 255, 0.5);
+            transition: all 0.3s ease;
+            border: none;
+            color: var(--deep-midnight);
+            font-size: 1.5rem;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(74, 107, 255, 0.7);
+        }
+
+        .chatbot-toggle.active {
+            background: var(--pulse-pink);
+            transform: rotate(45deg);
+        }
+
+        .chatbot-interface {
+            width: 350px;
+            background: rgba(10, 15, 46, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            height: 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+        }
+
+        .chatbot-interface.active {
+            transform: translateY(0);
+            opacity: 1;
+            height: 500px;
+            margin-bottom: 15px;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--deep-midnight);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header i {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .chatbot-header i:hover {
+            transform: rotate(90deg);
+        }
+
+        .chatbot-body {
+            padding: 15px;
+            height: 380px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chatbot-body::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .chatbot-body::-webkit-scrollbar-track {
+            background: rgba(138, 158, 255, 0.1);
+        }
+
+        .chatbot-body::-webkit-scrollbar-thumb {
+            background: var(--neon-cyan);
+            border-radius: 5px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bot-message {
+            background: rgba(138, 158, 255, 0.1);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            color: var(--cyber-white);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+            font-weight: 500;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            background: rgba(138, 158, 255, 0.1);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            border-radius: 15px;
+            width: fit-content;
+            align-self: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--neon-cyan);
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            background: rgba(138, 158, 255, 0.1);
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+        }
+
+        .chatbot-input button {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-input button:hover {
+            transform: scale(1.1);
+        }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-reply {
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-reply:hover {
+            background: rgba(0, 245, 212, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .chatbot-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .feature-btn {
+            background: rgba(138, 158, 255, 0.1);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            color: var(--neon-cyan);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .feature-btn:hover {
+            background: rgba(0, 245, 212, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 245, 212, 0.1);
+        }
+
+        /* MEDICINE REMINDER MODAL */
+        .reminder-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .reminder-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .reminder-content {
+            background: var(--deep-midnight);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--neon-cyan);
+            position: relative;
+        }
+
+        .reminder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .reminder-header h3 {
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .close-reminder {
+            background: transparent;
+            border: none;
+            color: var(--cyber-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-reminder:hover {
+            transform: rotate(90deg);
+            color: var(--pulse-pink);
+        }
+
+        .reminder-form label {
+            display: block;
+            color: var(--cyber-white);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .reminder-form input,
+        .reminder-form select {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--cyber-white);
+            font-size: 0.95rem;
+        }
+
+        .reminder-form input:focus,
+        .reminder-form select:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 2px rgba(0, 245, 212, 0.2);
+        }
+
+        .reminder-form button {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .reminder-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.4);
+        }
+
+        .reminder-list {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .reminder-item {
+            background: rgba(138, 158, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .reminder-info h4 {
+            color: var(--cyber-white);
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+        }
+
+        .reminder-info p {
+            color: rgba(240, 244, 255, 0.7);
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        .reminder-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .reminder-actions button {
+            background: transparent;
+            border: none;
+            color: var(--cyber-white);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .reminder-actions button:hover {
+            color: var(--pulse-pink);
+            transform: scale(1.2);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 3rem 0;
+            }
+
+            .hero-text {
+                margin-bottom: 3rem;
+            }
+
+            .button-group {
+                justify-content: center;
+            }
+
+            .popular-tags {
+                justify-content: center;
+            }
+
+            .search-bar {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .newsletter {
+                padding: 2rem;
+            }
+
+            .emergency-floating-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.3rem;
+            }
+
+            .chatbot-interface {
+                width: 300px;
+            }
+
+            .chatbot-interface.active {
+                height: 450px;
+            }
+
+            .chatbot-body {
+                height: 330px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-button, .secondary-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .newsletter-form button {
+                position: static;
+                width: 100%;
+            }
+
+            .emergency-message {
+                font-size: 1.5rem;
+            }
+
+            .emergency-countdown {
+                font-size: 3.5rem;
+            }
+
+            .floating-buttons-container {
+                bottom: 10px;
+                left: 10px;
+            }
+
+            .emergency-floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .chatbot-toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .chatbot-interface {
+                width: 280px;
+                bottom: 60px;
+            }
+
+            .chatbot-features {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Add to your CSS */
+:focus-visible {
+    outline: 3px solid var(--neon-cyan);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    <div class="glow-effect glow-3"></div>
+
+    <!-- Emergency Overlay (hidden by default) -->
+    <div class="emergency-overlay" id="emergencyOverlay">
+        <div class="emergency-countdown" id="emergencyCountdown">3</div>
+        <div class="emergency-message">Emergency services are being contacted. Please stay calm.</div>
+        <button class="emergency-cancel-btn" id="emergencyCancelBtn">Cancel Emergency</button>
+    </div>
+
+    <!-- Medicine Reminder Modal -->
+    <div class="reminder-modal" id="reminderModal">
+        <div class="reminder-content">
+            <div class="reminder-header">
+                <h3>Medicine Reminder</h3>
+                <button class="close-reminder" id="closeReminder">&times;</button>
+            </div>
+            <form class="reminder-form" id="reminderForm">
+                <label for="medName">Medicine Name</label>
+                <input type="text" id="medName" placeholder="e.g., Paracetamol 500mg" required>
+                
+                <label for="medDosage">Dosage</label>
+                <input type="text" id="medDosage" placeholder="e.g., 1 tablet" required>
+                
+                <label for="medFrequency">Frequency</label>
+                <select id="medFrequency" required>
+                    <option value="">Select frequency</option>
+                    <option value="Once a day">Once a day</option>
+                    <option value="Twice a day">Twice a day</option>
+                    <option value="Three times a day">Three times a day</option>
+                    <option value="Four times a day">Four times a day</option>
+                    <option value="Every 6 hours">Every 6 hours</option>
+                    <option value="Every 8 hours">Every 8 hours</option>
+                    <option value="Every 12 hours">Every 12 hours</option>
+                    <option value="As needed">As needed</option>
+                </select>
+                
+                <label for="medTime">Time</label>
+                <input type="time" id="medTime" required>
+                
+                <label for="medStart">Start Date</label>
+                <input type="date" id="medStart" required>
+                
+                <label for="medEnd">End Date (optional)</label>
+                <input type="date" id="medEnd">
+                
+                <button type="submit">Set Reminder</button>
+            </form>
+            
+            <div class="reminder-list" id="reminderList">
+                <!-- Reminders will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Element for Emergency Alarm -->
+    <audio id="emergencyAlarm" loop>
+        <source src="Siren Ambulance Australian - QuickSounds.com.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="container">
+        <header>
+            <a href="#" class="logo">
+                <i class="fas fa-prescription-bottle-alt"></i>
+                <span>CyberPharma</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="consult.html">Doctors</a></li>
+                    <li><a href="labttest.html">Lab Tests</a></li>
+                    <li><a href="bloging.html">Health Blog</a></li>
+                    <li><a href="blood.html">E-blood</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                </ul>
+            </nav>
+            <a href="login1.html" class="cta-button">Get Started</a>
+        </header>
+
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Healthcare,<br>But Make It <span class="gradient-text">Cyber</span></h1>
+                <p>Get your meds delivered in 30 mins or consult top doctors instantly. The future of healthcare is here, powered by AI and blockchain technology for complete security and transparency.</p>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for medicines, doctors, or health topics...">
+                    <button type="submit"><i class="fas fa-search"></i> Search</button>
+                </div>
+
+                <div class="button-group">
+                    <a href="consult.html" class="cta-button"><i class="fas fa-video"></i> Book a Doctor</a>
+                    <a href="e-store.html" class="secondary-button"><i class="fas fa-prescription-bottle-alt"></i> Order Meds</a>
+                </div>
+
+                <div class="popular-tags">
+                    <span>Explore trending:</span>
+                    <a href="Fitness.html"><i class="fas fa-dumbbell"></i> Fitness</a>
+                    <a href="skincare.html"><i class="fas fa-spa"></i> Skin Care</a>
+                    <a href="mentalhealth.html"><i class="fas fa-brain"></i> Mental Health</a>
+                    <a href="nutrition.html"><i class="fas fa-apple-alt"></i> Nutrition</a>
+                    <a href="homeremedies.html"><i class="fas fa-home"></i> Home Remedies</a>
+                </div>
+            </div>
+           <div class="hero-image">
+                 <div class="slideshow-container">
+    <!-- Futuristic healthcare images (Unsplash) -->
+                <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581595219315-a187dd40c322?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Instant Delivery</h3>
+                <p>Get your meds in under 30 mins with our hyper-fast drone delivery network operating 24/7 in major cities.</p>
+                <a href="medi.html" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>24/7 Doctors</h3>
+                <p>Video consult with certified doctors anytime, anywhere. Average wait time under 5 minutes with our AI matching system.</p>
+                <a href="consult.html" class="feature-link">Find a doctor <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-dna"></i>
+                </div>
+                <h3>AI Health Scan</h3>
+                <p>Our advanced AI analyzes your symptoms, medical history and suggests the most effective treatment options.</p>
+                <a href="healthscan.html" class="feature-link">Try it now <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <!-- Add to features section -->
+
+
+
+        </section>
+
+        <section class="testimonials">
+            <h2 class="section-title">What Our Users Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "I loved how easy and quick CyberPharma made everything — plus, the website's vibe is so fresh and futuristic, it actually made ordering medicines feel fun!".
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="4review.jpg" alt="Muskan Kadiya" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Muskan kadyan</h4>
+                            <p>Pharmacist</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "CyberPharma isn't just a pharmacy — it's a smart business move, combining cutting-edge design with efficient service to build real customer trust and loyalty."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="1review.jpg" alt="Ritik Dahiya" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Ritik Dahiya</h4>
+                            <p>Management Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "CyberPharma made ordering my medicines super easy — fast delivery, smooth website, and a really cool futuristic look!".
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="5reviews.jpg" alt="Monika Singh" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Monika Singh</h4>
+                            <p>Pharmacy Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As an engineer, I'm genuinely impressed — CyberPharma's UI is clean, futuristic, and incredibly user-friendly, setting a new standard for online healthcare platforms."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="6review.jpg" alt="Mayank" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Mayank</h4>
+                            <p>Engineering Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a pharmacy student at JNU, I love how CyberPharma makes healthcare feel so modern — the UI is super intuitive and inspiring for anyone passionate about the future of pharmacy."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="2review.jpg" alt="Deepak Yadav" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Deepak Yadav</h4>
+                            <p>Shopkeeper</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        The AI symptom checker accurately identified my condition before I even saw the doctor. This is the future of healthcare - efficient and precise.
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="3review.jpg" alt="Punit Yadav" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Punit Yadav</h4>
+                            <p> Junior Pharmacist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <h2>Stay Updated with CyberHealth</h2>
+            <p>Subscribe to our newsletter for the latest in health tech, wellness tips, and exclusive offers.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address">
+                <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </section>
+
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="pharm.html">Online Pharmacy</a></li>
+                        <li><a href="consult.html">Telemedicine</a></li>
+                        <li><a href="lab.html">Lab Tests</a></li>
+                        <li><a href="mental-health.html">Mental Health</a></li>
+                        <li><a href="emergency.html">Emergency Care</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="security.html">Security</a></li>
+                        <li><a href="accessibility.html">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="tel:+18005551234"><i class="fas fa-phone"></i> (800) 555-1234</a></li>
+                        <li><a href="mailto:hello@cyberpharma.com"><i class="fas fa-envelope"></i> thehellboy@gmail.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> xyz,delhi</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 CyberPharma Technologies. All rights reserved.</p>
+                <p>FDA Registered • HIPAA Compliant • Blockchain Secured</p>
+                <div class="footer-links">
+                    <a href="sitemap.html">Sitemap</a>
+                    <a href="feedback.html">Feedback</a>
+                    <a href="partners.html">Partners</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Floating Buttons Container -->
+    <div class="floating-buttons-container">
+        <!-- Chatbot -->
+        <div class="chatbot-container">
+            <div class="chatbot-interface" id="chatbotInterface">
+                <div class="chatbot-header">
+                    <span>CyberCare Assistant <i class="fas fa-robot"></i></span>
+                    <i class="fas fa-times" id="closeChatbot"></i>
+                </div>
+                <div class="chatbot-body" id="chatbotBody">
+                    <div class="message bot-message">
+                        Hi there! 👋 I'm CyberCare, your AI health assistant. How can I help you today?
+                    </div>
+                    <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+                <div class="chatbot-input">
+                    <input type="text" id="chatbotInput" placeholder="Type your message here...">
+                    <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+            <button class="chatbot-toggle" id="chatbotToggle">
+                <i class="fas fa-comment-medical"></i>
+            </button>
+        </div>
+
+        <!-- Emergency Button -->
+        <button class="emergency-floating-btn" id="emergencyBtn">
+            <i class="fas fa-bell"></i>
+        </button>
+    </div>
+    /* Add ARIA labels */
+<button aria-label="Open chat">...</button>
+
+    <script>
+        // Enhanced animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Emergency Button Functionality
+            const emergencyBtn = document.getElementById('emergencyBtn');
+            const emergencyOverlay = document.getElementById('emergencyOverlay');
+            const emergencyCountdown = document.getElementById('emergencyCountdown');
+            const emergencyCancelBtn = document.getElementById('emergencyCancelBtn');
+            const emergencyAlarm = document.getElementById('emergencyAlarm');
+            
+            let countdown;
+            let seconds = 3;
+
+            emergencyBtn.addEventListener('click', function() {
+                // Show overlay
+                emergencyOverlay.classList.add('active');
+                
+                // Start alarm
+                emergencyAlarm.play();
+                
+                // Start countdown
+                countdown = setInterval(function() {
+                    seconds--;
+                    emergencyCountdown.textContent = seconds;
+                    
+                    if (seconds <= 0) {
+                        clearInterval(countdown);
+                        window.location.href = 'emergency.html';
+                    }
+                }, 1000);
+            });
+
+            emergencyCancelBtn.addEventListener('click', function() {
+                // Hide overlay
+                emergencyOverlay.classList.remove('active');
+                
+                // Stop alarm
+                emergencyAlarm.pause();
+                emergencyAlarm.currentTime = 0;
+                
+                // Reset countdown
+                clearInterval(countdown);
+                seconds = 3;
+                emergencyCountdown.textContent = seconds;
+            });
+
+            // Chatbot Functionality
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            const chatbotInterface = document.getElementById('chatbotInterface');
+            const closeChatbot = document.getElementById('closeChatbot');
+            const chatbotBody = document.getElementById('chatbotBody');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const sendMessageBtn = document.getElementById('sendMessage');
+            const typingIndicator = document.getElementById('typingIndicator');
+
+            // Sample responses for the chatbot
+          // Replace your current botResponses array with:
+const botResponses = {
+    "medicine": [
+        "I found 3 options for your medication:",
+        "1. Generic (₹120)\n2. Standard (₹250)\n3. Premium (₹400)",
+        "Would you like me to:",
+        "1. Compare options\n2. Check interactions\n3. Place order"
+    ],
+    "doctor": [
+        "Available specialists:",
+        "1. Dr. Sharma (Cardiology) - 4.8★\n2. Dr. Patel (Dermatology) - 4.9★",
+        "Next available slots:\nToday 3PM or Tomorrow 10AM"
+    ],
+    "emergency": [
+        "EMERGENCY SERVICES CONTACTED",
+        "Nearest hospital: Apollo (1.2km)\nETA: 8 minutes",
+        "Stay calm. Help is coming."
+    ]
+};
+
+// Add this to your chatbot initialization:
+function showChatbotMenu() {
+    const menu = `
+    <div class="chatbot-features">
+        <div class="feature-btn" data-query="medicine">
+            <i class="fas fa-pills"></i> Medicines
+        </div>
+        <div class="feature-btn" data-query="doctor">
+            <i class="fas fa-user-md"></i> Doctors
+        </div>
+        <div class="feature-btn" data-query="emergency">
+            <i class="fas fa-ambulance"></i> Emergency
+        </div>
+    </div>`;
+    
+    chatbotBody.insertAdjacentHTML('beforeend', menu);
+    
+    document.querySelectorAll('.feature-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const queryType = this.getAttribute('data-query');
+            handleQueryResponse(queryType);
+        });
+    });
+}
+
+            // Quick reply options
+            const quickReplies = [
+                "Medicine reminder",
+                "Book a doctor",
+                "Order medicines",
+                "AI health scan",
+                "Emergency help"
+            ];
+
+            // Toggle chatbot visibility
+            chatbotToggle.addEventListener('click', function() {
+                chatbotInterface.classList.toggle('active');
+                chatbotToggle.classList.toggle('active');
+                
+                if (chatbotInterface.classList.contains('active')) {
+                    // Scroll to bottom when opening
+                    setTimeout(() => {
+                        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+                    }, 100);
+                }
+            });
+
+            closeChatbot.addEventListener('click', function() {
+                chatbotInterface.classList.remove('active');
+                chatbotToggle.classList.remove('active');
+            });
+
+            // Send message function
+            function sendMessage() {
+                const messageText = chatbotInput.value.trim();
+                if (messageText === '') return;
+
+                // Add user message to chat
+                addMessage(messageText, 'user');
+                chatbotInput.value = '';
+                
+                // Show typing indicator
+                typingIndicator.style.display = 'flex';
+                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+                
+                // Simulate bot thinking
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                    
+                    // Generate random response
+                    const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+                    addMessage(randomResponse, 'bot');
+                    
+                    // Show quick replies after bot response
+                    showQuickReplies();
+                    
+                    // Scroll to bottom
+                    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+                }, 1500);
+            }
+
+            // Add message to chat
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+                messageDiv.textContent = text;
+                chatbotBody.appendChild(messageDiv);
+            }
+
+            // Show quick reply options
+            function showQuickReplies() {
+                const quickRepliesDiv = document.createElement('div');
+                quickRepliesDiv.classList.add('quick-replies');
+                
+                quickReplies.forEach(reply => {
+                    const replyBtn = document.createElement('div');
+                    replyBtn.classList.add('quick-reply');
+                    replyBtn.textContent = reply;
+                    replyBtn.addEventListener('click', function() {
+                        addMessage(reply, 'user');
+                        this.remove();
+                        
+                        // Show typing indicator
+                        typingIndicator.style.display = 'flex';
+                        chatbotBody.scrollTop = chatbotBody.scrollHeight;
+                        
+                        // Simulate bot response
+                        setTimeout(() => {
+                            typingIndicator.style.display = 'none';
+                            
+                            if (reply === "Medicine reminder") {
+                                // Show medicine reminder feature
+                                showMedicineReminderFeature();
+                            } else {
+                                // Generic response
+                                const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+                                addMessage(randomResponse, 'bot');
+                                
+                                // Show quick replies again
+                                showQuickReplies();
+                            }
+                            
+                            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+                        }, 1500);
+                    });
+                    
+                    quickRepliesDiv.appendChild(replyBtn);
+                });
+                
+                chatbotBody.appendChild(quickRepliesDiv);
+                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+            }
+
+            // Show medicine reminder feature
+            function showMedicineReminderFeature() {
+                const featuresDiv = document.createElement('div');
+                featuresDiv.classList.add('chatbot-features');
+                
+                // Create feature buttons
+                const setReminderBtn = document.createElement('div');
+                setReminderBtn.classList.add('feature-btn');
+                setReminderBtn.innerHTML = '<i class="fas fa-bell"></i> Set New Reminder';
+                setReminderBtn.addEventListener('click', function() {
+                    openReminderModal();
+                });
+                
+                const viewRemindersBtn = document.createElement('div');
+                viewRemindersBtn.classList.add('feature-btn');
+                viewRemindersBtn.innerHTML = '<i class="fas fa-list"></i> View My Reminders';
+                viewRemindersBtn.addEventListener('click', function() {
+                    // In a real app, this would show the user's reminders
+                    addMessage("Here are your active reminders:", 'bot');
+                    // Simulated reminders
+                    const reminders = [
+                        {name: "Paracetamol 500mg", dosage: "1 tablet", time: "08:00 AM"},
+                        {name: "Vitamin D", dosage: "1 capsule", time: "12:00 PM"}
+                    ];
+                    
+                    if (reminders.length === 0) {
+                        addMessage("You don't have any active reminders set up yet.", 'bot');
+                    } else {
+                        reminders.forEach(reminder => {
+                            addMessage(`${reminder.name} - ${reminder.dosage} at ${reminder.time}`, 'bot');
+                        });
+                    }
+                    
+                    showQuickReplies();
+                });
+                
+                featuresDiv.appendChild(setReminderBtn);
+                featuresDiv.appendChild(viewRemindersBtn);
+                
+                // Add message and features to chat
+                addMessage("I can help you manage your medicine reminders. What would you like to do?", 'bot');
+                chatbotBody.appendChild(featuresDiv);
+                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+            }
+
+            // Event listeners for sending messages
+            sendMessageBtn.addEventListener('click', sendMessage);
+            chatbotInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // Medicine Reminder Modal Functionality
+            const reminderModal = document.getElementById('reminderModal');
+            const closeReminder = document.getElementById('closeReminder');
+            const reminderForm = document.getElementById('reminderForm');
+            const reminderList = document.getElementById('reminderList');
+
+            // Open reminder modal
+            function openReminderModal() {
+                reminderModal.classList.add('active');
+                loadReminders();
+            }
+
+            // Close reminder modal
+            closeReminder.addEventListener('click', function() {
+                reminderModal.classList.remove('active');
+            });
+
+            // Load saved reminders
+            function loadReminders() {
+                reminderList.innerHTML = '';
+                const savedReminders = JSON.parse(localStorage.getItem('cyberpharmaReminders')) || [];
+                
+                if (savedReminders.length === 0) {
+                    reminderList.innerHTML = '<p style="color: rgba(240, 244, 255, 0.7); text-align: center;">No reminders set yet</p>';
+                    return;
+                }
+                
+                savedReminders.forEach((reminder, index) => {
+                    const reminderItem = document.createElement('div');
+                    reminderItem.classList.add('reminder-item');
+                    
+                    const reminderInfo = document.createElement('div');
+                    reminderInfo.classList.add('reminder-info');
+                    reminderInfo.innerHTML = `
+                        <h4>${reminder.name}</h4>
+                        <p>${reminder.dosage} • ${reminder.frequency} • ${reminder.time}</p>
+                        <p>Starts: ${reminder.start} ${reminder.end ? '• Ends: ' + reminder.end : ''}</p>
+                    `;
+                    
+                    const reminderActions = document.createElement('div');
+                    reminderActions.classList.add('reminder-actions');
+                    reminderActions.innerHTML = `
+                        <button class="edit-reminder" data-index="${index}"><i class="fas fa-edit"></i></button>
+                        <button class="delete-reminder" data-index="${index}"><i class="fas fa-trash"></i></button>
+                    `;
+                    
+                    reminderItem.appendChild(reminderInfo);
+                    reminderItem.appendChild(reminderActions);
+                    reminderList.appendChild(reminderItem);
+                });
+                
+                // Add event listeners to delete buttons
+                document.querySelectorAll('.delete-reminder').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        deleteReminder(index);
+                    });
+                });
+                
+                // Add event listeners to edit buttons
+                document.querySelectorAll('.edit-reminder').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        editReminder(index);
+                    });
+                });
+            }
+
+            // Save new reminder
+            reminderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('medName').value;
+                const dosage = document.getElementById('medDosage').value;
+                const frequency = document.getElementById('medFrequency').value;
+                const time = document.getElementById('medTime').value;
+                const start = document.getElementById('medStart').value;
+                const end = document.getElementById('medEnd').value;
+                
+                const reminder = {
+                    name,
+                    dosage,
+                    frequency,
+                    time,
+                    start,
+                    end: end || 'No end date'
+                };
+                
+                // Save to localStorage
+                const savedReminders = JSON.parse(localStorage.getItem('cyberpharmaReminders')) || [];
+                savedReminders.push(reminder);
+                localStorage.setItem('cyberpharmaReminders', JSON.stringify(savedReminders));
+                
+                // Reset form
+                this.reset();
+                
+                // Reload reminders
+                loadReminders();
+                
+                // Show success message
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Reminder Set!';
+                
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                }, 2000);
+                
+                // Add message to chatbot
+                if (chatbotInterface.classList.contains('active')) {
+                    addMessage(`I've set a reminder for ${name} (${dosage}) ${frequency} at ${time}.`, 'bot');
+                    showQuickReplies();
+                    chatbotBody.scrollTop = chatbotBody.scrollHeight;
+                }
+            });
+
+            // Delete reminder
+            function deleteReminder(index) {
+                const savedReminders = JSON.parse(localStorage.getItem('cyberpharmaReminders')) || [];
+                savedReminders.splice(index, 1);
+                localStorage.setItem('cyberpharmaReminders', JSON.stringify(savedReminders));
+                loadReminders();
+            }
+
+            // Edit reminder
+            function editReminder(index) {
+                const savedReminders = JSON.parse(localStorage.getItem('cyberpharmaReminders')) || [];
+                const reminder = savedReminders[index];
+                
+                // Fill form with reminder data
+                document.getElementById('medName').value = reminder.name;
+                document.getElementById('medDosage').value = reminder.dosage;
+                document.getElementById('medFrequency').value = reminder.frequency;
+                document.getElementById('medTime').value = reminder.time;
+                document.getElementById('medStart').value = reminder.start;
+                document.getElementById('medEnd').value = reminder.end === 'No end date' ? '' : reminder.end;
+                
+                // Delete the old reminder
+                savedReminders.splice(index, 1);
+                localStorage.setItem('cyberpharmaReminders', JSON.stringify(savedReminders));
+                
+                // Scroll to form
+                reminderForm.scrollIntoView({ behavior: 'smooth' });
+                
+                // Update button text
+                const submitBtn = reminderForm.querySelector('button[type="submit"]');
+                submitBtn.textContent = 'Update Reminder';
+                
+                // Reload reminders
+                loadReminders();
+            }
+
+            // Check for reminders to notify
+            function checkReminders() {
+                const now = new Date();
+                const currentTime = now.toTimeString().substring(0, 5);
+                const currentDate = now.toISOString().substring(0, 10);
+                
+                const savedReminders = JSON.parse(localStorage.getItem('cyberpharmaReminders')) || [];
+                
+                savedReminders.forEach(reminder => {
+                    // Check if reminder time matches current time and date is within range
+                    if (reminder.time.substring(0, 5) === currentTime && 
+                        currentDate >= reminder.start && 
+                        (reminder.end === 'No end date' || currentDate <= reminder.end)) {
+                        
+                        // Show notification
+                        if (Notification.permission === 'granted') {
+                            new Notification(`Time to take your medicine: ${reminder.name}`, {
+                                body: `Dosage: ${reminder.dosage}`,
+                                icon: 'https://cdn-icons-png.flaticon.com/512/3144/3144456.png'
+                            });
+                        } else if (Notification.permission !== 'denied') {
+                            Notification.requestPermission().then(permission => {
+                                if (permission === 'granted') {
+                                    new Notification(`Time to take your medicine: ${reminder.name}`, {
+                                        body: `Dosage: ${reminder.dosage}`,
+                                        icon: 'https://cdn-icons-png.flaticon.com/512/3144/3144456.png'
+                                    });
+                                }
+                            });
+                        }
+                        
+                        // Play sound
+                        const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3');
+                        audio.play();
+                    }
+                });
+            }
+
+            // Check reminders every minute
+            setInterval(checkReminders, 60000);
+
+            // Animate elements when they come into view
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.feature-card, .testimonial-card');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+
+            // Set initial state for animation
+            const features = document.querySelectorAll('.feature-card');
+            const testimonials = document.querySelectorAll('.testimonial-card');
+            
+            features.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+            });
+            
+            testimonials.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+            });
+
+            // Run once on load
+            animateOnScroll();
+            
+            // Then run on scroll
+            window.addEventListener('scroll', animateOnScroll);
+
+            // Enhanced search bar interaction
+            const searchInput = document.querySelector('.search-bar input');
+            const searchButton = document.querySelector('.search-bar button');
+            
+            searchInput.addEventListener('focus', () => {
+                searchInput.style.border = '1px solid var(--neon-cyan)';
+                searchInput.style.boxShadow = '0 0 0 3px rgba(0, 245, 212, 0.2)';
+                searchButton.style.boxShadow = '0 5px 15px rgba(74, 107, 255, 0.4)';
+            });
+            
+            searchInput.addEventListener('blur', () => {
+                searchInput.style.border = '1px solid rgba(138, 158, 255, 0.3)';
+                searchInput.style.boxShadow = 'none';
+                searchButton.style.boxShadow = 'none';
+            });
+
+            // Glow effect follow mouse
+            const glow = document.querySelector('.glow-1');
+            document.addEventListener('mousemove', (e) => {
+                glow.style.left = `${e.clientX * 0.05}px`;
+                glow.style.top = `${e.clientY * 0.05}px`;
+            });
+
+            // Floating animation for feature cards on hover
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.classList.add('floating');
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.classList.remove('floating');
+                });
+            });
+
+            // Newsletter form submission
+            const newsletterForm = document.querySelector('.newsletter-form');
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                const email = emailInput.value;
+                
+                if (validateEmail(email)) {
+                    // Show success message
+                    const button = this.querySelector('button');
+                    button.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
+                    button.style.background = 'linear-gradient(90deg, var(--neon-cyan), var(--electric-blue))';
+                    
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        button.innerHTML = 'Subscribe <i class="fas fa-paper-plane"></i>';
+                        button.style.background = 'linear-gradient(90deg, var(--electric-blue), var(--neon-cyan))';
+                        emailInput.value = '';
+                    }, 2000);
+                    
+                    // In a real app, you would send this to your backend
+                    console.log('Subscribed email:', email);
+                } else {
+                    // Show error
+                    emailInput.style.borderColor = 'var(--pulse-pink)';
+                    emailInput.style.boxShadow = '0 0 0 3px rgba(255, 62, 157, 0.2)';
+                    
+                    setTimeout(() => {
+                        emailInput.style.borderColor = 'rgba(138, 158, 255, 0.3)';
+                        emailInput.style.boxShadow = 'none';
+                    }, 2000);
+                }
+            });
+
+            // Email validation function
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            // Mobile menu toggle (for smaller screens)
+            const mobileMenuToggle = document.createElement('button');
+            mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileMenuToggle.style.background = 'transparent';
+            mobileMenuToggle.style.border = 'none';
+            mobileMenuToggle.style.color = 'var(--cyber-white)';
+            mobileMenuToggle.style.fontSize = '1.5rem';
+            mobileMenuToggle.style.cursor = 'pointer';
+            mobileMenuToggle.style.display = 'none';
+            mobileMenuToggle.style.position = 'absolute';
+            mobileMenuToggle.style.right = '2rem';
+            mobileMenuToggle.style.top = '1.5rem';
+            
+            const header = document.querySelector('header');
+            header.style.position = 'relative';
+            header.appendChild(mobileMenuToggle);
+            
+            const nav = document.querySelector('nav ul');
+            
+            // Check screen size and setup mobile menu
+            function setupMobileMenu() {
+                if (window.innerWidth <= 768) {
+                    mobileMenuToggle.style.display = 'block';
+                    nav.style.display = 'none';
+                    nav.style.position = 'absolute';
+                    nav.style.top = '100%';
+                    nav.style.left = '0';
+                    nav.style.width = '100%';
+                    nav.style.background = 'var(--deep-midnight)';
+                    nav.style.flexDirection = 'column';
+                    nav.style.padding = '1rem';
+                    nav.style.borderBottom = '1px solid rgba(138, 158, 255, 0.2)';
+                    nav.style.zIndex = '1000';
+                } else {
+                    mobileMenuToggle.style.display = 'none';
+                    nav.style.display = 'flex';
+                }
+            }
+            
+            // Initial setup
+            setupMobileMenu();
+            
+            // Handle window resize
+            window.addEventListener('resize', setupMobileMenu);
+            
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', () => {
+                if (nav.style.display === 'none' || nav.style.display === '') {
+                    nav.style.display = 'flex';
+                    mobileMenuToggle.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    nav.style.display = 'none';
+                    mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (window.innerWidth <= 768) {
+                            nav.style.display = 'none';
+                            mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                    }
+                });
+            });
+            
+            // Add pulse animation to CTA buttons periodically
+            setInterval(() => {
+                const ctaButtons = document.querySelectorAll('.cta-button');
+                ctaButtons.forEach(button => {
+                    button.classList.add('pulse');
+                    
+                    setTimeout(() => {
+                        button.classList.remove('pulse');
+                    }, 1000);
+                });
+            }, 10000);
+            
+            // Interactive health topics (popular tags)
+            const popularTags = document.querySelectorAll('.popular-tags a');
+            popularTags.forEach(tag => {
+                tag.addEventListener('mouseenter', () => {
+                    tag.style.transform = 'scale(1.05)';
+                    tag.style.boxShadow = '0 5px 15px rgba(0, 245, 212, 0.3)';
+                });
+                
+                tag.addEventListener('mouseleave', () => {
+                    tag.style.transform = 'scale(1)';
+                    tag.style.boxShadow = 'none';
+                });
+            });
+            
+            // Doctor consultation booking simulation
+            const bookDoctorBtn = document.querySelector('.cta-button[href="consult.html"]');
+            if (bookDoctorBtn) {
+                bookDoctorBtn.addEventListener('click', (e) => {
+                    // In a real app, this would redirect to booking page
+                    console.log('Redirecting to doctor booking page');
+                    // e.preventDefault(); // Uncomment to test without redirect
+                });
+            }
+            
+            // Pharmacy order simulation
+            const orderMedsBtn = document.querySelector('.secondary-button[href="e-store.html"]');
+            if (orderMedsBtn) {
+                orderMedsBtn.addEventListener('click', (e) => {
+                    // In a real app, this would redirect to pharmacy page
+                    console.log('Redirecting to pharmacy page');
+                    // e.preventDefault(); // Uncomment to test without redirect
+                });
+            }
+            
+            // Health scan simulation
+            const healthScanLink = document.querySelector('.feature-link[href="healthscan.html"]');
+            if (healthScanLink) {
+                healthScanLink.addEventListener('click', (e) => {
+                    // In a real app, this would redirect to health scan
+                    console.log('Redirecting to AI health scan');
+                    // e.preventDefault(); // Uncomment to test without redirect
+                });
+            }
+            
+            // Add analytics tracking (example)
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    // In a real app, you would send this to your analytics platform
+                    console.log('Link clicked:', this.href);
+                });
+            });
+        });
+        // Add to your script
+function initVideoConsultation() {
+    // WebRTC integration would go here
+    console.log("Initializing video consultation...");
+    
+    // Mock UI for demo
+    const consultUI = `
+    <div class="consult-interface">
+        <video id="localVideo" autoplay muted></video>
+        <video id="remoteVideo" autoplay></video>
+        <div class="consult-controls">
+            <button id="endCall"><i class="fas fa-phone-slash"></i></button>
+            <button id="shareScreen"><i class="fas fa-desktop"></i></button>
+            <button id="sendPrescription"><i class="fas fa-file-prescription"></i></button>
+        </div>
+    </div>`;
+    
+    document.body.insertAdjacentHTML('beforeend', consultUI);
+};
+// Add to end of your script
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(registration => {
+            console.log('ServiceWorker registration successful');
+        }).catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+}
+// Auto-sliding hero images
+function initSlideshow() {
+  const slides = document.querySelectorAll('.slide');
+  let currentSlide = 0;
+
+  function nextSlide() {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }
+
+  setInterval(nextSlide, 8000); // Change slide every 8 seconds
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', initSlideshow);
+    </script>
+</body>
+</html>

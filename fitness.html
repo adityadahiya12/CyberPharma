@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediGlitch+ | BioHack Fitness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles (Reused from MediGlitch+) */
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+            --matrix-green: #00ff9d;
+            --biohack-orange: #ff6b35;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight) 0%, #1a1f4a 100%);
+            color: var(--cyber-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glow-effect {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .glow-1 { top: -50px; left: -50px; }
+        .glow-2 { bottom: -50px; right: -50px; background: radial-gradient(circle, var(--biohack-orange) 0%, transparent 70%); }
+        .glow-3 { top: 30%; right: 20%; background: radial-gradient(circle, var(--matrix-green) 0%, transparent 70%); }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* HEADER (Same as original) */
+        header {
+            background: rgba(10, 15, 46, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--pulse-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cyber-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, var(--pulse-pink), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 62, 157, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 62, 157, 0.6);
+        }
+
+        /* FITNESS HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.3), rgba(74, 107, 255, 0.3)), 
+                        url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                          rgba(10, 15, 46, 0.3) 0%, 
+                          rgba(255, 107, 53, 0.1) 50%, 
+                          rgba(10, 15, 46, 0.3) 100%);
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--cyber-white), var(--biohack-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            color: rgba(240, 244, 255, 0.9);
+            position: relative;
+        }
+
+        /* GOAL SELECTOR */
+        .goal-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .goal-tab {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(138, 158, 255, 0.1);
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            color: var(--cyber-white);
+        }
+
+        .goal-tab.active {
+            background: linear-gradient(90deg, var(--biohack-orange), var(--pulse-pink));
+            color: var(--deep-midnight);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+            border: 1px solid transparent;
+        }
+
+        .goal-tab:hover:not(.active) {
+            border-color: var(--neon-cyan);
+        }
+
+        /* GOAL SECTIONS */
+        .goal-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .goal-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            background: linear-gradient(90deg, var(--pulse-pink), var(--matrix-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* PROTEIN CALCULATOR */
+        .calculator {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem auto;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+        }
+
+        .calculator h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: var(--neon-cyan);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(10, 15, 46, 0.5);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            border-radius: 8px;
+            color: var(--cyber-white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 245, 212, 0.2);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(90deg, var(--biohack-orange), var(--neon-cyan));
+            color: var(--deep-midnight);
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background: rgba(0, 245, 212, 0.1);
+            border: 1px solid var(--neon-cyan);
+            text-align: center;
+            display: none;
+        }
+
+        /* DIET PLANS */
+        .diet-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .diet-card {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .diet-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--biohack-orange);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
+        }
+
+        .diet-card h3 {
+            color: var(--biohack-orange);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diet-card ul {
+            list-style: none;
+        }
+
+        .diet-card li {
+            margin-bottom: 0.8rem;
+            color: rgba(240, 244, 255, 0.8);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .diet-card li:before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+        }
+
+        .diet-icon {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--biohack-orange), var(--pulse-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* NUTRITION TIPS */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .tip-card {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .tip-card h4 {
+            color: var(--neon-cyan);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: rgba(10, 15, 46, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .goal-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* GLITCH EFFECT */
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 var(--pulse-pink), -0.05em -0.025em 0 var(--electric-blue); }
+            14% { text-shadow: 0.05em 0 0 var(--pulse-pink), -0.05em -0.025em 0 var(--electric-blue); }
+            15% { text-shadow: -0.05em -0.025em 0 var(--pulse-pink), 0.025em 0.025em 0 var(--electric-blue); }
+            49% { text-shadow: -0.05em -0.025em 0 var(--pulse-pink), 0.025em 0.025em 0 var(--electric-blue); }
+            50% { text-shadow: 0.025em 0.05em 0 var(--pulse-pink), 0.05em 0 0 var(--electric-blue); }
+            99% { text-shadow: 0.025em 0.05em 0 var(--pulse-pink), 0.05em 0 0 var(--electric-blue); }
+            100% { text-shadow: -0.025em 0 0 var(--pulse-pink), -0.025em -0.025em 0 var(--electric-blue); }
+        }
+
+        .glitch-text {
+            animation: glitch 5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    <div class="glow-effect glow-3"></div>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    <span class="glitch-text">Fitness Bar</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="consult.html">Doctors</a></li>
+                    <li><a href="blood.html">Blood</a></li>
+                    <li><a href="Bmi.html" class="active">BioHack Fitness</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                </ul>
+                
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h2>BioHack Your <span class="glitch-text">Body</span></h2>
+            <p>AI-optimized nutrition and quantum fitness protocols for weight loss, muscle gain, and body recomposition.</p>
+            <a href="#calculator" class="btn" style="background: linear-gradient(90deg, var(--biohack-orange), var(--pulse-pink));">
+                <i class="fas fa-calculator"></i> Calculate Protein
+            </a>
+        </div>
+    </section>
+    
+    <div class="container">
+        <!-- Goal Selector Tabs -->
+        <div class="goal-tabs">
+            <div class="goal-tab active" data-target="weight-loss">Weight Loss</div>
+            <div class="goal-tab" data-target="recomp">Body Recomp</div>
+            <div class="goal-tab" data-target="weight-gain">Muscle Gain</div>
+        </div>
+
+        <!-- Weight Loss Section -->
+        <section id="weight-loss" class="goal-section active">
+            <h2 class="section-title" style="background: linear-gradient(90deg, var(--matrix-green), var(--neon-cyan));">
+                Metabolic <span class="glitch-text">Overdrive</span>
+            </h2>
+            
+            <!-- Protein Calculator -->
+            <div id="calculator" class="calculator">
+                <h3><i class="fas fa-calculator"></i> Protein Calculator</h3>
+                <div class="form-group">
+                    <label for="weight"><i class="fas fa-weight"></i> Weight (kg)</label>
+                    <input type="number" id="weight" class="form-control" placeholder="e.g. 70">
+                </div>
+                <div class="form-group">
+                    <label for="activity"><i class="fas fa-running"></i> Activity Level</label>
+                    <select id="activity" class="form-control">
+                        <option value="1.2">Sedentary</option>
+                        <option value="1.375">Light Exercise</option>
+                        <option value="1.55">Moderate Exercise</option>
+                        <option value="1.725">Active</option>
+                        <option value="1.9">Very Active</option>
+                    </select>
+                </div>
+                <button class="calculate-btn">Calculate</button>
+                <div class="result" id="result">
+                    Your daily protein intake: <strong><span id="protein-result">0</span>g</strong>
+                </div>
+            </div>
+            
+            <!-- Diet Plans -->
+            <h3 style="text-align: center; margin: 3rem 0 1.5rem; color: var(--neon-cyan);">
+                <i class="fas fa-utensils"></i> AI-Optimized Diet Plans
+            </h3>
+            <div class="diet-plans">
+                <!-- Vegetarian -->
+                <div class="diet-card">
+                    <h3><i class="fas fa-leaf diet-icon"></i> Vegetarian</h3>
+                    <ul>
+                        <li><strong>Breakfast:</strong> Tofu scramble + avocado</li>
+                        <li><strong>Snack:</strong> Greek yogurt + almonds</li>
+                        <li><strong>Lunch:</strong> Quinoa + chickpea curry</li>
+                        <li><strong>Snack:</strong> Protein shake + flaxseeds</li>
+                        <li><strong>Dinner:</strong> Lentil soup + roasted veggies</li>
+                        <li><strong>Hydration:</strong> 3L water + green tea</li>
+                    </ul>
+                </div>
+                
+                <!-- Non-Vegetarian -->
+                <div class="diet-card">
+                    <h3><i class="fas fa-drumstick-bite diet-icon"></i> Non-Vegetarian</h3>
+                    <ul>
+                        <li><strong>Breakfast:</strong> Egg whites + smoked salmon</li>
+                        <li><strong>Snack:</strong> Cottage cheese + walnuts</li>
+                        <li><strong>Lunch:</strong> Grilled chicken + brown rice</li>
+                        <li><strong>Snack:</strong> Whey protein + peanut butter</li>
+                        <li><strong>Dinner:</strong> Baked fish + asparagus</li>
+                        <li><strong>Hydration:</strong> 3L water + black coffee</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Weight Loss Tips -->
+            <h3 style="text-align: center; margin: 3rem 0 1.5rem; color: var(--neon-cyan);">
+                <i class="fas fa-brain"></i> Quantum Fat-Loss Protocols
+            </h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4><i class="fas fa-fire"></i> Caloric Deficit</h4>
+                    <p>Maintain a 300-500kcal deficit using intermittent fasting (16:8 protocol).</p>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-heartbeat"></i> NEAT Boost</h4>
+                    <p>Increase non-exercise activity (walking, standing) to burn +200kcal/day.</p>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-dumbbell"></i> HIIT</h4>
+                    <p>3x weekly 20min sessions (30s sprint / 90s walk intervals).</p>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-moon"></i> Sleep Optimization</h4>
+                    <p>7-9 hours with 65°F room temperature for optimal fat oxidation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Body Recomp Section -->
+        <section id="recomp" class="goal-section">
+            <h2 class="section-title" style="background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));">
+                Body <span class="glitch-text">Recomposition</span>
+            </h2>
+            
+            <!-- Recomp Calculator -->
+            <div class="calculator">
+                <h3><i class="fas fa-calculator"></i> Recomp Macros</h3>
+                <div class="form-group">
+                    <label for="recomp-weight"><i class="fas fa-weight"></i> Weight (kg)</label>
+                    <input type="number" id="recomp-weight" class="form-control" placeholder="e.g. 70">
+                </div>
+                <div class="form-group">
+                    <label for="bodyfat"><i class="fas fa-percentage"></i> Body Fat %</label>
+                    <input type="number" id="bodyfat" class="form-control" placeholder="e.g. 20">
+                </div>
+                <button class="calculate-btn">Calculate</button>
+                <div class="result" id="recomp-result">
+                    Your macros: <strong><span id="recomp-macros">0</span></strong>
+                </div>
+            </div>
+            
+            <!-- Recomp Diet Plans -->
+            <h3 style="text-align: center; margin: 3rem 0 1.5rem; color: var(--neon-cyan);">
+                <i class="fas fa-utensils"></i> Recomp Nutrition Matrix
+            </h3>
+            <div class="diet-plans">
+                <!-- Vegetarian -->
+                <div class="diet-card">
+                    <h3><i class="fas fa-leaf diet-icon"></i> Vegetarian</h3>
+                    <ul>
+                        <li><strong>Breakfast:</strong> Tempeh + sweet potato</li>
+                        <li><strong>Snack:</strong> Skyr yogurt + chia seeds</li>
+                        <li><strong>Lunch:</strong> Seitan + buckwheat</li>
+                        <li><strong>Snack:</strong> Pea protein + almond milk</li>
+                        <li><strong>Dinner:</strong> Black bean tacos + guacamole</li>
+                        <li><strong>Timing:</strong> Protein every 3-4 hours</li>
+                    </ul>
+                </div>
+                
+                <!-- Non-Vegetarian -->
+                <div class="diet-card">
+                    <h3><i class="fas fa-drumstick-bite diet-icon"></i> Non-Vegetarian</h3>
+                    <ul>
+                        <li><strong>Breakfast:</strong> Turkey bacon + eggs</li>
+                        <li><strong>Snack:</strong> Tuna + rice cakes</li>
+                        <li><strong>Lunch:</strong> Lean beef + quinoa</li>
+                        <li><strong>Snack:</strong> Casein protein + berries</li>
+                        <li><strong>Dinner:</strong> Shrimp stir-fry + noodles</li>
+                        <li><strong>Timing:</strong> Protein every 3-4 hours</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Recomp Tips -->
+            <h3 style="text-align: center; margin: 3rem 0 1.5rem; color: var(--neon-cyan);">
+                <i class="fas fa-atom"></i> Recomp Protocols
+            </h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4><i class="fas fa-balance-scale"></i> Caloric Cycling</h4>
+                    <p>Training days: +200kcal | Rest days: -200kcal</p>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-dumbbell"></i> Progressive Overload</h4>
+                    <p>Increase weights 2-5% weekly with 3-5 sets of 6-12 reps.</p>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-bolt"></i> Protein Timing</h4>
+                    <p>40g protein within 30min post-workout.</p>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-heart"></i> Recovery</h4>
+                    <p>2:1 work:rest ratio between sets for optimal hypertrophy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Muscle Gain Section -->
+        <section id="weight-gain" class="goal-section">
+            <h2 class="section-title" style="background: linear-gradient(90deg, var(--pulse-pink), var(--electric-blue));">
+                Hypertrophy <span class="glitch-text">Protocol</span>
+            </h2>
+            
+            <!-- Muscle Gain Calculator -->
+            <div class="calculator">
+                <h3><i class="fas fa-calculator"></i> Mass Gain Calculator</h3>
+                <div class="form-group">
+                    <label for="gain-weight"><i class="fas fa-weight"></i> Weight (kg)</label>
+                    <input type="number" id="gain-weight" class="form-control" placeholder="e.g. 70">
+                </div>
+                <div class="form-group">
+                    <label for="metabolism"><i class="fas fa-bolt"></i> Metabolism</label>
+                    <select id="metabolism" class="form-control">
+                        <option value="30">Fast (Hardgainer)</option>
+                        <option value="35">Moderate</option>
+                        <option value="40">Slow</option>
+                    </select>
+                </div>
+                <button class="calculate-btn">Calculate</button>
+                <div class="result" id="gain-result">
+                    Daily calories: <strong><span id="gain-calories">0</span>kcal</strong>
+                </div>
+            </div>
+            
+            <!-- Mass Gain Diets -->
+            <h3 style="text-align: center; margin: 3rem 0 1.5rem; color: var(--neon-cyan);">
+                <i class="fas fa-utensils"></i> Anabolic Meal Plans
+            </h3>
+            <div class="diet-plans">
+                <!-- Vegetarian -->
+                <div class="diet-card">
+                    <h3><i class="fas fa-leaf diet-icon"></i> Vegetarian</h3>
+                    <ul>
+                        <li><strong>Breakfast:</strong> Paneer bhurji + whole wheat toast</li>
+                        <li><strong>Snack:</strong> Peanut butter + banana smoothie</li>
+                        <li><strong>Lunch:</strong> Soy chunks + rice + ghee</li>
+                        <li><strong>Snack:</strong> Mass gainer + dates</li>
+                        <li><strong>Dinner:</strong> Dal khichdi + yogurt</li>
+                        <li><strong>Before Bed:</strong> Casein protein + walnuts</li>
+                    </ul>
+                </div>
+                
+                <!-- Non-Vegetarian -->
+                <div class="diet-card">
+                    <h3><i class="fas fa-drumstick-bite diet-icon"></i> Non-Vegetarian</h3>
+                    <ul>
+                        <li><strong>Breakfast:</strong> 6 eggs + oats</li>
+                        <li><strong>Snack:</strong> Chicken sandwich + milk</li>
+                        <li><strong>Lunch:</strong> Mutton curry + rice</li>
+                        <li><strong>Snack:</strong> Mass gainer + banana</li>
+                        <li><strong>Dinner:</strong> Salmon + potatoes</li>
+                        <li><strong>Before Bed:</strong> Cottage cheese + almonds</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Muscle Gain Tips -->
+            <h3 style="text-align: center; margin: 3rem 0 1.5rem; color: var(--neon-cyan);">
+                <i class="fas fa-dna"></i> Hypertrophy Hacks
+            </h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4><i class="fas fa-arrow-up"></i> Caloric Surplus</h4>
+                    <p>300-500kcal surplus with 2g protein/kg bodyweight.</p>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-dumbbell"></i> Compound Lifts</h4>
+                    <p>Squat, deadlift, bench press 3x weekly.</p>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-clock"></i> Time Under Tension</h4>
+                    <p>4s eccentric, 1s concentric movements.</p>
+                </div>
+                <div class="tip-card">
+                    <h4><i class="fas fa-bed"></i> Recovery</h4>
+                    <p>48h between muscle group training.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                © 2025 |CyberPharma | Fitnessbar - All rights reserved
+            </div>
+            <!-- Your existing footer content -->
+        </div>
+    </footer>
+
+    <script>
+        // Tab Switching
+        document.querySelectorAll('.goal-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs/sections
+                document.querySelectorAll('.goal-tab, .goal-section').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab and corresponding section
+                tab.classList.add('active');
+                const target = tab.getAttribute('data-target');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+
+        // Protein Calculator
+        document.querySelector('.calculate-btn').addEventListener('click', () => {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+            
+            if (weight && activity) {
+                const protein = Math.round(weight * 2.2 * activity);
+                document.getElementById('protein-result').textContent = protein;
+                document.getElementById('result').style.display = 'block';
+            }
+        });
+
+        // Recomp Calculator
+        document.querySelectorAll('.calculate-btn')[1].addEventListener('click', () => {
+            const weight = parseFloat(document.getElementById('recomp-weight').value);
+            const bodyfat = parseFloat(document.getElementById('bodyfat').value);
+            
+            if (weight && bodyfat) {
+                const leanMass = weight * (1 - bodyfat/100);
+                const protein = Math.round(leanMass * 2.5);
+                const carbs = Math.round(leanMass * 3);
+                const fats = Math.round(leanMass * 0.8);
+                
+                document.getElementById('recomp-macros').textContent = 
+                    `${protein}g Protein | ${carbs}g Carbs | ${fats}g Fats`;
+                document.getElementById('recomp-result').style.display = 'block';
+            }
+        });
+
+        // Mass Gain Calculator
+        document.querySelectorAll('.calculate-btn')[2].addEventListener('click', () => {
+            const weight = parseFloat(document.getElementById('gain-weight').value);
+            const metabolism = parseFloat(document.getElementById('metabolism').value);
+            
+            if (weight && metabolism) {
+                const calories = Math.round(weight * metabolism + 500);
+                document.getElementById('gain-calories').textContent = calories;
+                document.getElementById('gain-result').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

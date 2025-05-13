@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediGlitch+ | Blood Facts & Donation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reuse your existing CSS variables and base styles */
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+            --matrix-green: #00ff9d;
+            --blood-red: #ff1a4a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight) 0%, #1a1f4a 100%);
+            color: var(--cyber-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glow-effect {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .glow-1 { top: -50px; left: -50px; }
+        .glow-2 { bottom: -50px; right: -50px; background: radial-gradient(circle, var(--blood-red) 0%, transparent 70%); }
+        .glow-3 { top: 30%; right: 20%; background: radial-gradient(circle, var(--matrix-green) 0%, transparent 70%); }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* HEADER (Same as your existing header) */
+        header {
+            background: rgba(10, 15, 46, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--pulse-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cyber-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, var(--pulse-pink), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 62, 157, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 62, 157, 0.6);
+        }
+
+        /* HERO SECTION (Blood-themed) */
+        .hero {
+            background: linear-gradient(135deg, rgba(255, 26, 74, 0.3), rgba(74, 107, 255, 0.3)), 
+                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                          rgba(10, 15, 46, 0.3) 0%, 
+                          rgba(255, 26, 74, 0.1) 50%, 
+                          rgba(10, 15, 46, 0.3) 100%);
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--cyber-white), var(--blood-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            color: rgba(240, 244, 255, 0.9);
+            position: relative;
+        }
+
+        /* BLOOD FACTS SECTION */
+        .blood-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .fact-card {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 26, 74, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .fact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--blood-red);
+            box-shadow: 0 10px 25px rgba(255, 26, 74, 0.2);
+        }
+
+        .fact-card h3 {
+            color: var(--blood-red);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .fact-card p {
+            color: rgba(240, 244, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .fact-icon {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--blood-red), var(--pulse-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* BLOOD TYPE COMPATIBILITY */
+        .compatibility {
+            background: rgba(255, 26, 74, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(255, 26, 74, 0.3);
+        }
+
+        .compatibility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .blood-type {
+            background: rgba(10, 15, 46, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--blood-red);
+        }
+
+        .blood-type h4 {
+            color: var(--blood-red);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .blood-type ul {
+            list-style: none;
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* DONATION CTA */
+        .donation-cta {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .donation-cta .btn {
+            background: linear-gradient(90deg, var(--blood-red), var(--pulse-pink));
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(255, 26, 74, 0.4);
+        }
+
+        .donation-cta .btn:hover {
+            box-shadow: 0 6px 25px rgba(255, 26, 74, 0.6);
+        }
+
+        /* FOOTER (Same as your existing footer) */
+        footer {
+            background: rgba(10, 15, 46, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* GLITCH EFFECT (Reused from your code) */
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 var(--pulse-pink), -0.05em -0.025em 0 var(--electric-blue); }
+            14% { text-shadow: 0.05em 0 0 var(--pulse-pink), -0.05em -0.025em 0 var(--electric-blue); }
+            15% { text-shadow: -0.05em -0.025em 0 var(--pulse-pink), 0.025em 0.025em 0 var(--electric-blue); }
+            49% { text-shadow: -0.05em -0.025em 0 var(--pulse-pink), 0.025em 0.025em 0 var(--electric-blue); }
+            50% { text-shadow: 0.025em 0.05em 0 var(--pulse-pink), 0.05em 0 0 var(--electric-blue); }
+            99% { text-shadow: 0.025em 0.05em 0 var(--pulse-pink), 0.05em 0 0 var(--electric-blue); }
+            100% { text-shadow: -0.025em 0 0 var(--pulse-pink), -0.025em -0.025em 0 var(--electric-blue); }
+        }
+
+        .glitch-text {
+            animation: glitch 5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    <div class="glow-effect glow-3"></div>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-user-md"></i>
+                    <span class="glitch-text">Cyberpharma</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="blood.html" class="active">Blood Banks</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                </ul>
+                
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h2>Blood <span class="glitch-text">Network</span></h2>
+            <p>Discover life-saving facts, compatibility guides, and join our blockchain-powered blood donation ecosystem.</p>
+            <a href="https://www.redcrossblood.org/donate-blood/blood-donation-process/donation-process-overview.html" class="btn" style="background: linear-gradient(90deg, var(--blood-red), var(--pulse-pink));">
+                <i class="fas fa-tint"></i> Donate Now
+            </a>
+        </div>
+    </section>
+    
+    <div class="container">
+        <!-- Blood Facts Section -->
+        <section id="facts">
+            <h2 class="section-title" style="background: linear-gradient(90deg, var(--blood-red), var(--pulse-pink)); -webkit-background-clip: text;">
+                Blood <span class="glitch-text">Facts</span>
+            </h2>
+            <div class="blood-facts">
+                <div class="fact-card">
+                    <h3><i class="fas fa-heartbeat fact-icon"></i> Blood Volume</h3>
+                    <p>The average adult has about <strong>5 liters</strong> of blood. Your body can replace lost blood plasma in <strong>24-48 hours</strong>.</p>
+                </div>
+                <div class="fact-card">
+                    <h3><i class="fas fa-bolt fact-icon"></i> Donation Speed</h3>
+                    <p>A whole blood donation takes just <strong>8-10 minutes</strong>. Your body replaces the donated red cells in <strong>4-6 weeks</strong>.</p>
+                </div>
+                <div class="fact-card">
+                    <h3><i class="fas fa-dna fact-icon"></i> Rare Types</h3>
+                    <p>Only <strong>7%</strong> of people have O-negative blood (universal donor). AB-positive is the rarest at <strong>3%</strong> of the population.</p>
+                </div>
+                <div class="fact-card">
+                    <h3><i class="fas fa-shield-alt fact-icon"></i> Lifespan</h3>
+                    <p>Red blood cells live for about <strong>120 days</strong>. Platelets last just <strong>5-9 days</strong>, requiring constant donations.</p>
+                </div>
+                <div class="fact-card">
+                    <h3><i class="fas fa-microscope fact-icon"></i> Components</h3>
+                    <p>One donation can be separated into <strong>red cells, plasma, and platelets</strong> to save up to <strong>3 lives</strong>.</p>
+                </div>
+                <div class="fact-card">
+                    <h3><i class="fas fa-globe fact-icon"></i> Global Need</h3>
+                    <p>Every <strong>2 seconds</strong> someone needs blood. Less than <strong>10%</strong> of eligible donors give annually.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blood Type Compatibility -->
+        <section class="compatibility">
+            <h2 class="section-title" style="background: linear-gradient(90deg, var(--blood-red), var(--matrix-green)); -webkit-background-clip: text;">
+                Type <span class="glitch-text">Compatibility</span>
+            </h2>
+            <p style="text-align: center; margin-bottom: 1rem; color: rgba(240, 244, 255, 0.8);">
+                Know who you can donate to or receive from in emergencies.
+            </p>
+            <div class="compatibility-grid">
+                <div class="blood-type">
+                    <h4><i class="fas fa-tint" style="color: var(--blood-red);"></i> O-</h4>
+                    <ul>
+                        <li><strong>Donates to:</strong> All</li>
+                        <li><strong>Receives:</strong> O-</li>
+                    </ul>
+                </div>
+                <div class="blood-type">
+                    <h4><i class="fas fa-tint" style="color: var(--blood-red);"></i> O+</h4>
+                    <ul>
+                        <li><strong>Donates to:</strong> O+, A+, B+, AB+</li>
+                        <li><strong>Receives:</strong> O+, O-</li>
+                    </ul>
+                </div>
+                <div class="blood-type">
+                    <h4><i class="fas fa-tint" style="color: var(--blood-red);"></i> A-</h4>
+                    <ul>
+                        <li><strong>Donates to:</strong> A+, A-, AB+, AB-</li>
+                        <li><strong>Receives:</strong> A-, O-</li>
+                    </ul>
+                </div>
+                <div class="blood-type">
+                    <h4><i class="fas fa-tint" style="color: var(--blood-red);"></i> A+</h4>
+                    <ul>
+                        <li><strong>Donates to:</strong> A+, AB+</li>
+                        <li><strong>Receives:</strong> A+, A-, O+, O-</li>
+                    </ul>
+                </div>
+                <div class="blood-type">
+                    <h4><i class="fas fa-tint" style="color: var(--blood-red);"></i> B-</h4>
+                    <ul>
+                        <li><strong>Donates to:</strong> B+, B-, AB+, AB-</li>
+                        <li><strong>Receives:</strong> B-, O-</li>
+                    </ul>
+                </div>
+                <div class="blood-type">
+                    <h4><i class="fas fa-tint" style="color: var(--blood-red);"></i> B+</h4>
+                    <ul>
+                        <li><strong>Donates to:</strong> B+, AB+</li>
+                        <li><strong>Receives:</strong> B+, B-, O+, O-</li>
+                    </ul>
+                </div>
+                <div class="blood-type">
+                    <h4><i class="fas fa-tint" style="color: var(--blood-red);"></i> AB-</h4>
+                    <ul>
+                        <li><strong>Donates to:</strong> AB+, AB-</li>
+                        <li><strong>Receives:</strong> All negatives</li>
+                    </ul>
+                </div>
+                <div class="blood-type">
+                    <h4><i class="fas fa-tint" style="color: var(--blood-red);"></i> AB+</h4>
+                    <ul>
+                        <li><strong>Donates to:</strong> AB+</li>
+                        <li><strong>Receives:</strong> All types</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation CTA -->
+        <section id="donate" class="donation-cta">
+            <h2 class="section-title" style="background: linear-gradient(90deg, var(--blood-red), var(--neon-cyan)); -webkit-background-clip: text;">
+                Ready to <span class="glitch-text">Save Lives</span>?
+            </h2>
+            <p style="max-width: 700px; margin: 1rem auto 2rem; color: rgba(240, 244, 255, 0.8);">
+                Join our decentralized blood donor network. Earn <strong>NFT badges</strong> for donations and get <strong>real-time alerts</strong> when your blood type is needed.
+            </p>
+            <a href="login1.html" class="btn">
+                <i class="fas fa-id-card-alt"></i> Register as Donor
+            </a>
+        </section>
+    </div>
+    
+    <footer style="text-align: center; padding: 2rem 0; background: rgba(10, 15, 46, 0.8);">
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+        <p>© 2025 Cyberpharma | The Future of Healthcare</p>
+    </footer>
+
+    <script>
+        // Add interactive functionality here (e.g., modal for donor registration)
+        console.log("Blood page loaded");
+    </script>
+</body>
+</html>

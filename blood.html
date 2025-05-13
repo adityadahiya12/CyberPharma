@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloodLink NCR | Delhi-NCR Blood Bank Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+            --matrix-green: #00ff9d;
+            --blood-red: #ff3a3a;
+            --delhi-orange: #FF7F24;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight) 0%, #1a1f4a 100%);
+            color: var(--cyber-white);
+            min-height: 100vh;
+        }
+
+        .glow-effect {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .glow-1 { top: 10%; left: 10%; }
+        .glow-2 { bottom: 10%; right: 10%; background: radial-gradient(circle, var(--pulse-pink) 0%, transparent 70%); }
+        .glow-3 { top: 50%; right: 50%; background: radial-gradient(circle, var(--blood-red) 0%, transparent 70%); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            background: rgba(10, 15, 46, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+            padding: 1.5rem 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--delhi-orange), var(--blood-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cyber-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--delhi-orange);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--delhi-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--delhi-orange), var(--blood-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(240, 244, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .search-container {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            max-width: 800px;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(10, 15, 46, 0.5);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            border-radius: 50px;
+            color: var(--cyber-white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--delhi-orange);
+            box-shadow: 0 0 0 3px rgba(255, 127, 36, 0.3);
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(240, 244, 255, 0.6);
+        }
+
+        .search-bar button {
+            background: linear-gradient(90deg, var(--delhi-orange), var(--blood-red));
+            color: var(--cyber-white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .search-bar button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 127, 36, 0.4);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: rgba(10, 15, 46, 0.5);
+            color: var(--cyber-white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active {
+            background: var(--delhi-orange);
+            border-color: var(--delhi-orange);
+            font-weight: 600;
+        }
+
+        .filter-btn:hover:not(.active) {
+            background: rgba(138, 158, 255, 0.2);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .blood-banks {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .bank-card {
+            background: rgba(10, 15, 46, 0.5);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--delhi-orange);
+            transition: all 0.3s ease;
+        }
+
+        .bank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 127, 36, 0.2);
+        }
+
+        .bank-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--cyber-white);
+        }
+
+        .bank-distance {
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .bank-address {
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .bank-contacts {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-btn {
+            background: rgba(138, 158, 255, 0.2);
+            color: var(--cyber-white);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: var(--delhi-orange);
+        }
+
+        .blood-chart {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blood-chart::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="%238a9eff" fill-opacity="0.05" d="M44.8,-48.8C56.4,-36.3,62.8,-18.1,63.9,0.9C65,19.9,60.8,39.8,49.2,52.3C37.6,64.8,18.8,69.8,-0.7,70.5C-20.2,71.2,-40.4,67.6,-53.1,55.1C-65.8,42.6,-71,21.3,-68.9,2.3C-66.8,-16.7,-57.4,-33.4,-44.7,-45.9C-32,-58.4,-16,-66.8,1.3,-68.1C18.6,-69.4,37.2,-63.6,44.8,-48.8Z" transform="translate(100 100)"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .chart-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .blood-group {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--blood-red);
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            font-weight: 600;
+            margin: 0.5rem;
+            position: relative;
+            box-shadow: 0 0 10px rgba(255, 58, 58, 0.5);
+        }
+
+        .blood-group.rare {
+            background: var(--pulse-pink);
+            box-shadow: 0 0 15px rgba(255, 62, 157, 0.7);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .donation-arrow {
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--neon-cyan);
+            transform-origin: left center;
+        }
+
+        .donation-arrow::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: -3px;
+            width: 0;
+            height: 0;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+            border-left: 6px solid var(--neon-cyan);
+        }
+
+        .chart-info {
+            margin-top: 2rem;
+            background: rgba(10, 15, 46, 0.5);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .info-item i {
+            color: var(--neon-cyan);
+        }
+
+        .load-more {
+            display: block;
+            width: 200px;
+            margin: 3rem auto;
+            background: linear-gradient(90deg, var(--delhi-orange), var(--blood-red));
+            color: var(--cyber-white);
+            padding: 1rem;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .load-more:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 127, 36, 0.4);
+        }
+
+        footer {
+            background: rgba(10, 15, 46, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--neon-cyan);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: rgba(240, 244, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--neon-cyan);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--cyber-white);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-cyan);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+            color: rgba(240, 244, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* NCR Specific Styles */
+        .ncr-map {
+            width: 100%;
+            height: 300px;
+            background: rgba(10, 15, 46, 0.5);
+            border-radius: 10px;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+        }
+
+        .ncr-map::before {
+            content: 'NCR Blood Bank Network Coverage';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-weight: 600;
+            color: var(--neon-cyan);
+            z-index: 2;
+        }
+
+        .map-marker {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--blood-red);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .map-marker::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 58, 58, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s infinite;
+        }
+
+        .map-marker.delhi { top: 40%; left: 50%; background: var(--delhi-orange); }
+        .map-marker.gurgaon { top: 55%; left: 45%; }
+        .map-marker.noida { top: 45%; left: 60%; }
+        .map-marker.faridabad { top: 60%; left: 55%; }
+        .map-marker.ghaziabad { top: 35%; left: 65%; }
+
+        .map-label {
+            position: absolute;
+            color: var(--cyber-white);
+            font-size: 0.8rem;
+            background: rgba(10, 15, 46, 0.8);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            transform: translate(15px, -50%);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+            }
+            
+            .search-bar button {
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    <div class="glow-effect glow-3"></div>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-tint"></i>
+                    <span>BloodLink </span>
+                </div>
+                <ul class="nav-links">
+                    
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="bloodfact.html">Blood Facts</a></li>
+                    <li><a href="https://www.redcrossblood.org/donate-blood/blood-donation-process/donation-process-overview.html">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>BLOOD NETWORK</h1>
+            <p>Connecting donors with blood banks across the National Capital Region. Find the nearest blood donation center in Delhi, Noida, Gurugram, Faridabad, or Ghaziabad.</p>
+        </div>
+
+        <div class="search-container">
+            <div class="search-bar">
+                <input type="text" id="locationInput" placeholder="Enter your location (e.g., Connaught Place, 110001)">
+                <button id="searchBtn"><i class="fas fa-location-dot"></i> Find Blood Banks</button>
+            </div>
+            <div class="filter-group">
+                <div class="filter-btn active">All Blood Types</div>
+                <div class="filter-btn">A+</div>
+                <div class="filter-btn">A-</div>
+                <div class="filter-btn">B+</div>
+                <div class="filter-btn">B-</div>
+                <div class="filter-btn">AB+</div>
+                <div class="filter-btn">AB-</div>
+                <div class="filter-btn">O+</div>
+                <div class="filter-btn">O-</div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="blood-banks">
+                <h2 class="section-title"><i class="fas fa-hospital"></i> POPULAR BLOOD BANKS IN NCR</h2>
+                
+                <div class="bank-card">
+                    <h3 class="bank-name">Indian Red Cross Society (Delhi)</h3>
+                    <div class="bank-distance"><i class="fas fa-location-dot"></i> Central Delhi</div>
+                    <p class="bank-address">1, Red Cross Road, Near Parliament House, New Delhi - 110001</p>
+                    <div class="bank-contacts">
+                        <a href="tel:+911123712300" class="contact-btn"><i class="fas fa-phone"></i> +91 11 2371 2300</a>
+                        <a href="https://www.justdial.com/Delhi/Indian-Red-Cross-Society-Near-Parliament-House-New-Delhi/011PXX11-XX11-110713163505-B6C7_BZDET" target="_blank" class="contact-btn"><i class="fas fa-external-link-alt"></i> View on JustDial</a>
+                    </div>
+                </div>
+                
+                <div class="bank-card">
+                    <h3 class="bank-name">Rotary Blood Bank (Delhi)</h3>
+                    <div class="bank-distance"><i class="fas fa-location-dot"></i> South Delhi</div>
+                    <p class="bank-address">C-5, Qutab Institutional Area, Near JNU, New Delhi - 110016</p>
+                    <div class="bank-contacts">
+                        <a href="tel:+911126561515" class="contact-btn"><i class="fas fa-phone"></i> +91 11 2656 1515</a>
+                        <a href="https://www.justdial.com/Delhi/Rotary-Blood-Bank-Near-JNU-Metro-Station-New-Delhi/011PXX11-XX11-110713163505-B6C7_BZDET" target="_blank" class="contact-btn"><i class="fas fa-external-link-alt"></i> View on JustDial</a>
+                    </div>
+                </div>
+                
+                <div class="bank-card">
+                    <h3 class="bank-name">BloodConnect (Noida)</h3>
+                    <div class="bank-distance"><i class="fas fa-location-dot"></i> Sector 62, Noida</div>
+                    <p class="bank-address">Sector 62, Near Ganga Shopping Complex, Noida - 201301</p>
+                    <div class="bank-contacts">
+                        <a href="tel:+919810155566" class="contact-btn"><i class="fas fa-phone"></i> +91 98101 55566</a>
+                        <a href="https://www.justdial.com/Noida/BloodConnect-Near-Ganga-Shopping-Complex-Sector-62/0120PX120-X120-120830123727-B3K9_BZDET" target="_blank" class="contact-btn"><i class="fas fa-external-link-alt"></i> View on JustDial</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="blood-chart">
+                <div class="chart-container">
+                    <h2 class="section-title"><i class="fas fa-project-diagram"></i> BLOOD TYPE MATRIX</h2>
+                    
+                    <div style="position: relative; height: 400px; margin: 0 auto;">
+                        <!-- Blood Type O- -->
+                        <div class="blood-group rare" style="top: 50px; left: 50%; transform: translateX(-50%);">O-</div>
+                        
+                        <!-- Blood Type O+ -->
+                        <div class="blood-group" style="top: 120px; left: 50%; transform: translateX(-50%);">O+</div>
+                        
+                        <!-- Blood Type A- -->
+                        <div class="blood-group" style="top: 190px; left: 30%;">A-</div>
+                        
+                        <!-- Blood Type A+ -->
+                        <div class="blood-group" style="top: 260px; left: 30%;">A+</div>
+                        
+                        <!-- Blood Type B- -->
+                        <div class="blood-group" style="top: 190px; left: 70%;">B-</div>
+                        
+                        <!-- Blood Type B+ -->
+                        <div class="blood-group" style="top: 260px; left: 70%;">B+</div>
+                        
+                        <!-- Blood Type AB- -->
+                        <div class="blood-group rare" style="top: 330px; left: 30%;">AB-</div>
+                        
+                        <!-- Blood Type AB+ -->
+                        <div class="blood-group" style="top: 330px; left: 70%;">AB+</div>
+                        
+                        <!-- Donation Arrows -->
+                        <div class="donation-arrow" style="top: 75px; left: 50%; width: 0; height: 70px; transform: translateX(-50%) rotate(90deg);"></div>
+                        
+                        <div class="donation-arrow" style="top: 145px; left: 50%; width: 0; height: 70px; transform: translateX(-50%) rotate(90deg);"></div>
+                        
+                        <div class="donation-arrow" style="top: 215px; left: 30%; width: 0; height: 70px; transform: translateX(-50%) rotate(90deg);"></div>
+                        
+                        <div class="donation-arrow" style="top: 285px; left: 30%; width: 0; height: 70px; transform: translateX(-50%) rotate(90deg);"></div>
+                        
+                        <div class="donation-arrow" style="top: 215px; left: 70%; width: 0; height: 70px; transform: translateX(-50%) rotate(90deg);"></div>
+                        
+                        <div class="donation-arrow" style="top: 285px; left: 70%; width: 0; height: 70px; transform: translateX(-50%) rotate(90deg);"></div>
+                        
+                        <div class="donation-arrow" style="top: 215px; left: 50%; width: 80px; transform: rotate(-30deg);"></div>
+                        
+                        <div class="donation-arrow" style="top: 215px; left: 50%; width: 80px; transform: rotate(30deg);"></div>
+                        
+                        <div class="donation-arrow" style="top: 285px; left: 50%; width: 80px; transform: rotate(-30deg);"></div>
+                        
+                        <div class="donation-arrow" style="top: 285px; left: 50%; width: 80px; transform: rotate(30deg);"></div>
+                    </div>
+                    
+                    <div class="chart-info">
+                        <div class="info-item"><i class="fas fa-info-circle"></i> <strong>O-</strong> is the universal donor (can donate to all blood types)</div>
+                        <div class="info-item"><i class="fas fa-info-circle"></i> <strong>AB+</strong> is the universal recipient (can receive from all blood types)</div>
+                        <div class="info-item"><i class="fas fa-info-circle"></i> <strong>O- and AB-</strong> are the rarest blood types in NCR</div>
+                        <div class="info-item"><i class="fas fa-info-circle"></i> Arrow direction indicates donation compatibility</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ncr-map" id="ncrMap">
+            <div class="map-marker delhi"></div>
+            <div class="map-label" style="top: 40%; left: 50%;">Delhi</div>
+            
+            <div class="map-marker gurgaon"></div>
+            <div class="map-label" style="top: 55%; left: 45%;">Gurugram</div>
+            
+            <div class="map-marker noida"></div>
+            <div class="map-label" style="top: 45%; left: 60%;">Noida</div>
+            
+            <div class="map-marker faridabad"></div>
+            <div class="map-label" style="top: 60%; left: 55%;">Faridabad</div>
+            
+            <div class="map-marker ghaziabad"></div>
+            <div class="map-label" style="top: 35%; left: 65%;">Ghaziabad</div>
+        </div>
+
+        <a href="https://www.justdial.com/Delhi-NCR/Blood-Banks/nct-10192844" target="_blank" class="load-more">VIEW ALL ON JUSTDIAL <i class="fas fa-external-link-alt"></i></a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>BloodLink NCR</h3>
+                <p>Serving the National Capital Region since 2010 with our network of blood banks and donors.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://www.justdial.com/Delhi-NCR/Blood-Banks/nct-10192844" target="_blank">Find Blood Banks</a></li>
+                    <li><a href="#">Become a Donor</a></li>
+                    <li><a href="#">Blood Donation Camps</a></li>
+                    <li><a href="#">Emergency Requests</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Partner Blood Banks</h3>
+                <ul>
+                    <li><a href="https://indianredcross.org" target="_blank">Indian Red Cross</a></li>
+                    <li><a href="http://rotarybloodbank.org" target="_blank">Rotary Blood Bank</a></li>
+                    <li><a href="https://bloodconnect.org" target="_blank">BloodConnect</a></li>
+                    <li><a href="https://www.eraktkosh.in" target="_blank">E-Rakt Kosh</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Organization</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Network</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Cyberpharma |Blood link - Serving Delhi, Noida, Gurugram, Faridabad & Ghaziabad
+        </div>
+    </footer>
+
+    <script>
+        // Search functionality to redirect to JustDial
+        const searchInput = document.getElementById('locationInput');
+        const searchBtn = document.getElementById('searchBtn');
+        
+        searchBtn.addEventListener('click', () => {
+            const location = searchInput.value.trim();
+            if (location) {
+                redirectToJustDial(location);
+            } else {
+                alert('Please enter a location to search');
+            }
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && searchInput.value.trim()) {
+                redirectToJustDial(searchInput.value.trim());
+            }
+        });
+
+        // Function to redirect to JustDial with the searched location
+        function redirectToJustDial(location) {
+            // Clean the location string for URL
+            const cleanedLocation = location.replace(/\s+/g, '-').toLowerCase();
+            
+            // Determine if the location is in Delhi NCR
+            const isNCR = location.toLowerCase().includes('delhi') || 
+                         location.toLowerCase().includes('noida') || 
+                         location.toLowerCase().includes('gurgaon') || 
+                         location.toLowerCase().includes('gurugram') || 
+                         location.toLowerCase().includes('faridabad') || 
+                         location.toLowerCase().includes('ghaziabad') ||
+                         /(11|12|20|201|110|122|121)\d{3}/.test(location);
+            
+            if (isNCR) {
+                // Redirect to JustDial's blood banks page for the searched location
+                window.open(`https://www.justdial.com/${cleanedLocation}/Blood-Banks/nct-10192844`, '_blank');
+            } else {
+                // If not in NCR, show Delhi NCR results by default
+                if (confirm('Showing results for Delhi-NCR. For other locations, please visit JustDial directly.')) {
+                    window.open('https://www.justdial.com/Jhajjar/Blood-Banks/nct-10049054', '_blank');
+                }
+            }
+        }
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

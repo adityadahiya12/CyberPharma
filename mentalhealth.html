@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberPharma | Mental Health Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+            --cyber-purple: #8a2be2;
+            --emergency-red: #ff3a3a;
+            --bio-green: #00ffaa;
+            --cyber-glow: 0 0 10px rgba(74, 107, 255, 0.7);
+            --neon-glow: 0 0 15px rgba(0, 245, 212, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight) 0%, #1a1f4a 100%);
+            color: var(--cyber-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .glow-effect {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-1 { top: -50px; left: -50px; }
+        .glow-2 { bottom: -50px; right: -50px; background: radial-gradient(circle, var(--neon-cyan) 0%, transparent 70%); }
+        .glow-3 { top: 50%; left: 30%; background: radial-gradient(circle, var(--pulse-pink) 0%, transparent 70%); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--cyber-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            color: var(--neon-cyan);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 107, 255, 0.4);
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 107, 255, 0.6);
+        }
+
+        /* MENTAL HEALTH HERO */
+        .mental-health-hero {
+            text-align: center;
+            padding: 5rem 0 3rem;
+            position: relative;
+        }
+
+        .mental-health-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        .mental-health-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--cyber-white), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mental-health-hero p {
+            font-size: 1.2rem;
+            color: rgba(240, 244, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* MENTAL HEALTH ASSESSMENT */
+        .assessment-section {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .assessment-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(0, 245, 212, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .assessment-progress {
+            height: 8px;
+            background: rgba(138, 158, 255, 0.2);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .assessment-question {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--cyber-white);
+        }
+
+        .assessment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .assessment-option {
+            background: rgba(138, 158, 255, 0.1);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .assessment-option:hover {
+            background: rgba(138, 158, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .assessment-option.selected {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            font-weight: 600;
+            border: none;
+        }
+
+        .assessment-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .assessment-btn {
+            background: rgba(138, 158, 255, 0.2);
+            color: var(--cyber-white);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .assessment-btn:hover {
+            background: rgba(138, 158, 255, 0.3);
+        }
+
+        .assessment-btn.primary {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            font-weight: 600;
+            border: none;
+        }
+
+        .assessment-result {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .result-meter {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .meter-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--pulse-pink) 0% 20%,
+                var(--electric-blue) 20% 60%,
+                var(--neon-cyan) 60% 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .meter-inner {
+            width: 80%;
+            height: 80%;
+            background: var(--deep-midnight);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+        }
+
+        .result-category {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+        }
+
+        .result-description {
+            color: rgba(240, 244, 255, 0.8);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .result-recommendations {
+            background: rgba(138, 158, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 3px solid var(--neon-cyan);
+        }
+
+        .result-recommendations h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .result-recommendations ul {
+            text-align: left;
+            padding-left: 1.5rem;
+        }
+
+        .result-recommendations li {
+            margin-bottom: 0.5rem;
+            color: rgba(240, 244, 255, 0.8);
+        }
+
+        /* INFO SECTIONS */
+        .info-section {
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: rgba(138, 158, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 245, 212, 0.1);
+            border-color: var(--neon-cyan);
+        }
+
+        .info-card h3 {
+            color: var(--cyber-white);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h3 i {
+            color: var(--neon-cyan);
+        }
+
+        .info-card p {
+            color: rgba(240, 244, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .warning-card {
+            border-left: 4px solid var(--pulse-pink);
+            background: rgba(255, 62, 157, 0.1);
+        }
+
+        .positive-card {
+            border-left: 4px solid var(--neon-cyan);
+            background: rgba(0, 245, 212, 0.1);
+        }
+
+        /* THERAPIST SECTION */
+        .therapists-section {
+            margin: 4rem 0;
+        }
+
+        .therapist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .therapist-card {
+            background: rgba(138, 158, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .therapist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 245, 212, 0.1);
+        }
+
+        .therapist-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .therapist-info {
+            padding: 1.5rem;
+        }
+
+        .therapist-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--neon-cyan);
+        }
+
+        .therapist-specialty {
+            color: var(--soft-glitch);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .therapist-bio {
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .therapist-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .therapist-btn {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .book-btn {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            font-weight: 600;
+        }
+
+        .profile-btn {
+            background: rgba(138, 158, 255, 0.2);
+            color: var(--cyber-white);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+        }
+
+        .therapist-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.2);
+        }
+
+        /* VIDEO SECTION */
+        .video-section {
+            margin: 4rem 0;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 10px;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials-section {
+            margin: 4rem 0;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .testimonial-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .testimonial-slider::-webkit-scrollbar-track {
+            background: rgba(138, 158, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .testimonial-slider::-webkit-scrollbar-thumb {
+            background: var(--neon-cyan);
+            border-radius: 4px;
+        }
+
+        .testimonial {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+            background: rgba(138, 158, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: rgba(240, 244, 255, 0.9);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .testimonial-author img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--neon-cyan);
+        }
+
+        .author-info h4 {
+            color: var(--cyber-white);
+            font-size: 0.95rem;
+        }
+
+        .author-info p {
+            color: rgba(240, 244, 255, 0.6);
+            font-size: 0.85rem;
+        }
+
+        /* RESOURCES SECTION */
+        .resources-section {
+            margin: 4rem 0;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .resource-card {
+            background: rgba(138, 158, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-cyan);
+        }
+
+        .resource-card h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .resource-card p {
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-link {
+            color: var(--cyber-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            color: var(--neon-cyan);
+        }
+
+        /* CONTACT FORM */
+        .contact-section {
+            margin: 4rem 0;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 1rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.4);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--cyber-white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-cyan);
+            transform: translateY(-3px);
+        }
+
+        footer p {
+            color: rgba(240, 244, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* ANIMATIONS */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .mental-health-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .mental-health-hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .assessment-options {
+                grid-template-columns: 1fr;
+            }
+
+            .therapist-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .mental-health-hero h1 {
+                font-size: 2rem;
+            }
+
+            .mental-health-icon {
+                font-size: 3rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    <div class="glow-effect glow-3"></div>
+
+    <div class="container">
+        <header>
+            <a href="home.html" class="logo">
+                <i class="fas fa-prescription-bottle-alt"></i>
+                <span>CyberPharma</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="consult.html">Doctors</a></li>
+                    <li><a href="labttest.html">Lab Tests</a></li>
+                    <li><a href="bloging.html">Health Blog</a></li>
+                    <li><a href="blood.html">E-blood</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                </ul>
+            </nav>
+            <a href="login1.html" class="cta-button">Get Started</a>
+        </header>
+
+        <section class="mental-health-hero">
+            <div class="mental-health-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <h1>NeuroSync Mental Health Hub</h1>
+            <p>Your mind is the ultimate interface. Optimize your mental OS with our cutting-edge diagnostics, therapeutic protocols, and neural enhancement programs.</p>
+            <a href="#assessment" class="cta-button">
+                <i class="fas fa-chart-line"></i> Take Mental Health Scan
+            </a>
+        </section>
+
+        <!-- MENTAL HEALTH ASSESSMENT -->
+        <section class="assessment-section" id="assessment">
+            <h2 class="section-title">NeuroScan Assessment</h2>
+            <p>Complete this 10-question assessment to evaluate your current mental health status and receive personalized recommendations.</p>
+            
+            <div class="assessment-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div id="assessmentContainer">
+                <div class="assessment-question" id="questionText">How often have you felt down, depressed, or hopeless in the past 2 weeks?</div>
+                <div class="assessment-options" id="optionsContainer">
+                    <div class="assessment-option" data-value="0">Not at all</div>
+                    <div class="assessment-option" data-value="1">Several days</div>
+                    <div class="assessment-option" data-value="2">More than half the days</div>
+                    <div class="assessment-option" data-value="3">Nearly every day</div>
+                </div>
+                <div class="assessment-nav">
+                    <button class="assessment-btn" id="prevBtn" disabled>Previous</button>
+                    <button class="assessment-btn primary" id="nextBtn">Next</button>
+                </div>
+            </div>
+            
+            <div class="assessment-result" id="resultContainer">
+                <div class="result-meter">
+                    <div class="meter-circle">
+                        <div class="meter-inner" id="scoreDisplay">72</div>
+                    </div>
+                </div>
+                <div class="result-category" id="resultCategory">Moderate Concern</div>
+                <div class="result-description" id="resultDescription">Your assessment indicates some areas of concern that may benefit from professional support or self-care strategies.</div>
+                
+                <div class="result-recommendations">
+                    <h3>Recommended Actions</h3>
+                    <ul id="recommendationsList">
+                        <li>Schedule a consultation with one of our mental health specialists</li>
+                        <li>Practice daily mindfulness exercises (10-15 minutes)</li>
+                        <li>Establish a consistent sleep routine</li>
+                        <li>Consider joining a support group</li>
+                    </ul>
+                </div>
+                
+                <button class="cta-button" id="restartBtn" style="margin-top: 2rem;">
+                    <i class="fas fa-redo"></i> Take Assessment Again
+                </button>
+            </div>
+        </section>
+
+        <!-- MENTAL HEALTH INFO SECTIONS -->
+        <section class="info-section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Understanding Mental Health</h2>
+            <p>Mental health refers to our cognitive, behavioral, and emotional well-being. It affects how we think, feel, and act in daily life, and influences how we handle stress, relate to others, and make choices.</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-heart"></i> Emotional Well-being</h3>
+                    <p>The ability to manage and express emotions appropriately, cope with stress, and maintain satisfying relationships.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-users"></i> Social Well-being</h3>
+                    <p>Developing and maintaining healthy relationships, feeling connected to others, and contributing to your community.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-cogs"></i> Psychological Well-being</h3>
+                    <p>Having a sense of purpose, self-acceptance, personal growth, and the ability to manage life's challenges.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2 class="section-title"><i class="fas fa-search-plus"></i> Causes of Mental Health Issues</h2>
+            <p>Mental health conditions often result from a complex interaction of biological, psychological, and social factors.</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-dna"></i> Biological Factors</h3>
+                    <p>Genetics, brain chemistry, hormonal imbalances, or physical health conditions can predispose individuals to mental health issues.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-bolt"></i> Trauma & Stress</h3>
+                    <p>Childhood trauma, abuse, loss of a loved one, financial problems, or major life changes can trigger mental health conditions.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-pills"></i> Substance Abuse</h3>
+                    <p>Alcohol and drug use can both cause and result from mental health problems, creating a vicious cycle.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-network-wired"></i> Environmental Factors</h3>
+                    <p>Social isolation, work stress, discrimination, or poor living conditions can contribute to mental health deterioration.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> Common Mental Health Problems</h2>
+            <p>Mental health conditions manifest in various forms, each with unique symptoms and challenges.</p>
+            
+            <div class="info-grid">
+                <div class="info-card warning-card">
+                    <h3><i class="fas fa-cloud"></i> Depression</h3>
+                    <p>Persistent sadness, loss of interest in activities, fatigue, changes in appetite or sleep, feelings of worthlessness.</p>
+                </div>
+                <div class="info-card warning-card">
+                    <h3><i class="fas fa-heartbeat"></i> Anxiety Disorders</h3>
+                    <p>Excessive worry, panic attacks, phobias, obsessive thoughts, or compulsive behaviors that interfere with daily life.</p>
+                </div>
+                <div class="info-card warning-card">
+                    <h3><i class="fas fa-moon"></i> Sleep Disorders</h3>
+                    <p>Insomnia, hypersomnia, or disrupted sleep patterns that affect daytime functioning and overall health.</p>
+                </div>
+                <div class="info-card warning-card">
+                    <h3><i class="fas fa-user-friends"></i> Social Withdrawal</h3>
+                    <p>Avoiding social interactions, loss of interest in relationships, or difficulty connecting with others.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> Impact on Daily Life</h2>
+            <p>Poor mental health can create ripples across all aspects of life, often in ways that aren't immediately obvious.</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-user"></i> Personal Life</h3>
+                    <p>Reduced quality of life, low self-esteem, difficulty enjoying activities, and impaired decision-making abilities.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-handshake"></i> Relationships</h3>
+                    <p>Strained family dynamics, friendship difficulties, intimacy problems, and social isolation.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-briefcase"></i> Work/School</h3>
+                    <p>Decreased productivity, concentration difficulties, absenteeism, and impaired professional growth.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-heartbeat"></i> Physical Health</h3>
+                    <p>Weakened immune system, increased risk of chronic diseases, sleep disturbances, and substance abuse.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2 class="section-title"><i class="fas fa-radiation-alt"></i> Risks of Ignoring Mental Health</h2>
+            <p>Neglecting mental health can lead to serious consequences that compound over time.</p>
+            
+            <div class="info-grid">
+                <div class="info-card warning-card">
+                    <h3><i class="fas fa-exclamation"></i> Emotional Breakdown</h3>
+                    <p>Complete inability to function normally, severe mood swings, or emotional numbness.</p>
+                </div>
+                <div class="info-card warning-card">
+                    <h3><i class="fas fa-fire-extinguisher"></i> Loss of Motivation</h3>
+                    <p>Lack of energy or desire to pursue goals, maintain relationships, or care for oneself.</p>
+                </div>
+                <div class="info-card warning-card">
+                    <h3><i class="fas fa-skull-crossbones"></i> Suicidal Thoughts</h3>
+                    <p>In extreme cases, untreated mental health conditions can lead to self-harm or suicidal ideation.</p>
+                </div>
+                <div class="info-card warning-card">
+                    <h3><i class="fas fa-pills"></i> Substance Dependence</h3>
+                    <p>Using alcohol or drugs to self-medicate, leading to addiction and worsening mental health.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2 class="section-title"><i class="fas fa-heartbeat"></i> Management & Improvement</h2>
+            <p>Just like physical health, mental health can be improved with the right strategies and support.</p>
+            
+            <div class="info-grid">
+                <div class="info-card positive-card">
+                    <h3><i class="fas fa-comment-medical"></i> Professional Help</h3>
+                    <p>Therapy, counseling, or psychiatric treatment tailored to your specific needs and condition.</p>
+                </div>
+                <div class="info-card positive-card">
+                    <h3><i class="fas fa-spa"></i> Mindfulness</h3>
+                    <p>Meditation, deep breathing exercises, and mindfulness practices to reduce stress and anxiety.</p>
+                </div>
+                <div class="info-card positive-card">
+                    <h3><i class="fas fa-running"></i> Physical Activity</h3>
+                    <p>Regular exercise releases endorphins and improves mood, sleep, and self-esteem.</p>
+                </div>
+                <div class="info-card positive-card">
+                    <h3><i class="fas fa-network-wired"></i> Social Connection</h3>
+                    <p>Maintaining meaningful relationships and seeking support when needed.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- THERAPISTS SECTION -->
+        <section class="therapists-section">
+            <h2 class="section-title"><i class="fas fa-user-md"></i> Connect With Therapists</h2>
+            <p>Our certified mental health professionals are available for virtual consultations. Book a session that fits your schedule.</p>
+            
+            <div class="therapist-grid">
+                <div class="therapist-card">
+                    <div class="therapist-image" style="background-image: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                    <div class="therapist-info">
+                        <h3>Dr. Sarah Chen</h3>
+                        <p class="therapist-specialty">Clinical Psychologist | CBT Specialist</p>
+                        <p class="therapist-bio">Specializes in anxiety disorders and depression with 12 years of clinical experience.</p>
+                        <div class="therapist-actions">
+                            <button class="therapist-btn book-btn">Book Session</button>
+                            <button class="therapist-btn profile-btn">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="therapist-card">
+                    <div class="therapist-image" style="background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80');"></div>
+                    <div class="therapist-info">
+                        <h3>Dr. Michael Rodriguez</h3>
+                        <p class="therapist-specialty">Psychiatrist | Medication Management</p>
+                        <p class="therapist-bio">Expert in pharmacological approaches to mental health conditions.</p>
+                        <div class="therapist-actions">
+                            <button class="therapist-btn book-btn">Book Session</button>
+                            <button class="therapist-btn profile-btn">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="therapist-card">
+                    <div class="therapist-image" style="background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80');"></div>
+                    <div class="therapist-info">
+                        <h3>Dr. Priya Patel</h3>
+                        <p class="therapist-specialty">Trauma Specialist | EMDR Certified</p>
+                        <p class="therapist-bio">Helps clients process trauma and build resilience through evidence-based therapies.</p>
+                        <div class="therapist-actions">
+                            <button class="therapist-btn book-btn">Book Session</button>
+                            <button class="therapist-btn profile-btn">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="consult.html" class="cta-button">
+                    <i class="fas fa-search"></i> Find More Therapists
+                </a>
+            </div>
+        </section>
+
+        <!-- VIDEO SECTION -->
+        <section class="video-section">
+            <h2 class="section-title"><i class="fas fa-play-circle"></i> Mental Health Matters</h2>
+            <p>Watch this inspiring talk about overcoming mental health challenges and building resilience.</p>
+            
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/WWloIAQpMcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="testimonials-section">
+            <h2 class="section-title"><i class="fas fa-quote-left"></i> Stories of Hope</h2>
+            <p>Hear from people who have navigated mental health challenges and emerged stronger.</p>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "After years of struggling with anxiety, therapy helped me understand my triggers and develop coping mechanisms. Today, I'm living proof that recovery is possible."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah K.">
+                        <div class="author-info">
+                            <h4>Sarah K.</h4>
+                            <p>Anxiety Survivor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "Depression made me feel like I was stuck in a dark tunnel with no way out. With medication and support groups, I gradually saw light again. Don't give up."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="David R.">
+                        <div class="author-info">
+                            <h4>David R.</h4>
+                            <p>Depression Survivor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "The mindfulness techniques I learned here changed my relationship with stress. I now have tools to manage my mental health proactively."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Maria L.">
+                        <div class="author-info">
+                            <h4>Maria L.</h4>
+                            <p>Stress Management</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "I was skeptical about therapy at first, but my therapist created a safe space where I could be completely honest. That made all the difference."
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="James T.">
+                        <div class="author-info">
+                            <h4>James T.</h4>
+                            <p>Therapy Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESOURCES SECTION -->
+        <section class="resources-section">
+            <h2 class="section-title"><i class="fas fa-book-open"></i> Mental Health Resources</h2>
+            <p>Explore these trusted resources for additional support and information.</p>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3>Crisis Hotlines</h3>
+                    <p>Immediate help for mental health crises and suicidal thoughts.</p>
+                    <a href="#" class="resource-link">
+                        <i class="fas fa-phone"></i> View Numbers
+                    </a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Self-Help Guides</h3>
+                    <p>Downloadable workbooks and exercises for managing symptoms.</p>
+                    <a href="#" class="resource-link">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Support Groups</h3>
+                    <p>Find local or online communities for shared experiences.</p>
+                    <a href="#" class="resource-link">
+                        <i class="fas fa-users"></i> Find Groups
+                    </a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Meditation Apps</h3>
+                    <p>Recommended apps for mindfulness and relaxation.</p>
+                    <a href="#" class="resource-link">
+                        <i class="fas fa-mobile-alt"></i> View List
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT FORM -->
+        <section class="contact-section">
+            <h2 class="section-title"><i class="fas fa-envelope"></i> Get In Touch</h2>
+            <p>Have questions or need personalized advice? Send us a message.</p>
+            
+            <form class="contact-form" id="mentalHealthForm">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <select required>
+                    <option value="">Select Inquiry Type</option>
+                    <option value="therapy">Therapy Questions</option>
+                    <option value="resources">Resource Request</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="emergency">Emergency Contact</option>
+                </select>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </section>
+
+        <footer>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>© 2025 CyberPharma | NeuroSync Mental Health Hub</p>
+            <p>Your mind matters. Reach out for help when you need it.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Mental Health Assessment Script
+        const questions = [
+            {
+                question: "How often have you felt down, depressed, or hopeless in the past 2 weeks?",
+                options: [
+                    "Not at all",
+                    "Several days",
+                    "More than half the days",
+                    "Nearly every day"
+                ]
+            },
+            {
+                question: "How often have you had little interest or pleasure in doing things?",
+                options: [
+                    "Not at all",
+                    "Several days",
+                    "More than half the days",
+                    "Nearly every day"
+                ]
+            },
+            {
+                question: "How often have you had trouble falling or staying asleep, or sleeping too much?",
+                options: [
+                    "Not at all",
+                    "Several days",
+                    "More than half the days",
+                    "Nearly every day"
+                ]
+            },
+            {
+                question: "How often have you felt tired or had little energy?",
+                options: [
+                    "Not at all",
+                    "Several days",
+                    "More than half the days",
+                    "Nearly every day"
+                ]
+            },
+            {
+                question: "How often have you had poor appetite or overeaten?",
+                options: [
+                    "Not at all",
+                    "Several days",
+                    "More than half the days",
+                    "Nearly every day"
+                ]
+            },
+            {
+                question: "How often have you felt nervous, anxious, or on edge?",
+                options: [
+                    "Not at all",
+                    "Several days",
+                    "More than half the days",
+                    "Nearly every day"
+                ]
+            },
+            {
+                question: "How often have you been unable to stop or control worrying?",
+                options: [
+                    "Not at all",
+                    "Several days",
+                    "More than half the days",
+                    "Nearly every day"
+                ]
+            },
+            {
+                question: "How often have you had trouble concentrating on things?",
+                options: [
+                    "Not at all",
+                    "Several days",
+                    "More than half the days",
+                    "Nearly every day"
+                ]
+            },
+            {
+                question: "How often have you been moving or speaking slowly, or the opposite - restless?",
+                options: [
+                    "Not at all",
+                    "Several days",
+                    "More than half the days",
+                    "Nearly every day"
+                ]
+            },
+            {
+                question: "How often have you had thoughts of hurting yourself in some way?",
+                options: [
+                    "Not at all",
+                    "Several days",
+                    "More than half the days",
+                    "Nearly every day"
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+        let totalScore = 0;
+
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const progressBar = document.getElementById('progressBar');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const assessmentContainer = document.getElementById('assessmentContainer');
+        const resultContainer = document.getElementById('resultContainer');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const resultCategory = document.getElementById('resultCategory');
+        const resultDescription = document.getElementById('resultDescription');
+        const recommendationsList = document.getElementById('recommendationsList');
+        const restartBtn = document.getElementById('restartBtn');
+
+        function loadQuestion(index) {
+            const question = questions[index];
+            questionText.textContent = question.question;
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'assessment-option';
+                optionElement.textContent = option;
+                optionElement.dataset.value = i;
+                optionElement.addEventListener('click', selectOption);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Highlight previously selected option if exists
+            if (answers[index] !== undefined) {
+                optionsContainer.children[answers[index]].classList.add('selected');
+            }
+            
+            // Update progress bar
+            progressBar.style.width = `${((index + 1) / questions.length) * 100}%`;
+            
+            // Update button states
+            prevBtn.disabled = index === 0;
+            nextBtn.textContent = index === questions.length - 1 ? 'Submit' : 'Next';
+        }
+
+        function selectOption(e) {
+            const options = document.querySelectorAll('.assessment-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            e.target.classList.add('selected');
+            answers[currentQuestion] = parseInt(e.target.dataset.value);
+        }
+
+        function showResult() {
+            // Calculate total score (0-30 scale)
+            totalScore = answers.reduce((sum, value) => sum + value, 0) * (30 / (questions.length * 3));
+            totalScore = Math.round(totalScore);
+            
+            // Determine result category
+            let category, description;
+            let recommendations = [];
+            
+            if (totalScore <= 10) {
+                category = "Minimal Concern";
+                description = "Your assessment suggests you're currently experiencing minimal mental health concerns. Continue practicing good self-care habits.";
+                recommendations = [
+                    "Maintain regular exercise and healthy sleep patterns",
+                    "Practice mindfulness or meditation regularly",
+                    "Stay connected with supportive relationships"
+                ];
+            } else if (totalScore <= 20) {
+                category = "Mild Concern";
+                description = "Your assessment indicates some mild concerns that may benefit from additional support or self-care strategies.";
+                recommendations = [
+                    "Consider speaking with a mental health professional",
+                    "Practice stress-reduction techniques daily",
+                    "Monitor your symptoms and reach out if they worsen",
+                    "Join a support group or community activity"
+                ];
+            } else if (totalScore <= 25) {
+                category = "Moderate Concern";
+                description = "Your assessment suggests moderate mental health concerns that would likely benefit from professional support.";
+                recommendations = [
+                    "Schedule a consultation with a mental health specialist",
+                    "Practice daily mindfulness exercises (10-15 minutes)",
+                    "Establish a consistent sleep routine",
+                    "Consider joining a support group",
+                    "Reach out to trusted friends or family members"
+                ];
+            } else {
+                category = "Severe Concern";
+                description = "Your assessment indicates significant mental health concerns that would benefit from immediate professional attention.";
+                recommendations = [
+                    "Contact a mental health professional immediately",
+                    "Reach out to a crisis hotline if needed",
+                    "Inform a trusted friend or family member",
+                    "Prioritize self-care and safety",
+                    "Consider speaking with your primary care physician"
+                ];
+            }
+            
+            // Display results
+            scoreDisplay.textContent = totalScore;
+            resultCategory.textContent = category;
+            resultDescription.textContent = description;
+            
+            // Update recommendations
+            recommendationsList.innerHTML = '';
+            recommendations.forEach(rec => {
+                const li = document.createElement('li');
+                li.textContent = rec;
+                recommendationsList.appendChild(li);
+            });
+            
+            // Show result container
+            assessmentContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+        }
+
+        function restartAssessment() {
+            currentQuestion = 0;
+            answers = [];
+            totalScore = 0;
+            assessmentContainer.style.display = 'block';
+            resultContainer.style.display = 'none';
+            loadQuestion(0);
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            if (answers[currentQuestion] === undefined) {
+                alert('Please select an option before continuing');
+                return;
+            }
+            
+            if (currentQuestion === questions.length - 1) {
+                showResult();
+            } else {
+                currentQuestion++;
+                loadQuestion(currentQuestion);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentQuestion--;
+            loadQuestion(currentQuestion);
+        });
+
+        restartBtn.addEventListener('click', restartAssessment);
+
+        // Therapist booking buttons
+        document.querySelectorAll('.book-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // In a real app, this would open a booking modal
+                alert('Booking system would open here. Connecting you to therapist...');
+            });
+        });
+
+        // Form submission
+        document.getElementById('mentalHealthForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message. A mental health professional will respond within 24 hours.');
+            this.reset();
+        });
+
+        // Initialize first question
+        loadQuestion(0);
+
+        // Glow effect follow mouse
+        document.addEventListener('mousemove', (e) => {
+            const glow1 = document.querySelector('.glow-1');
+            const glow2 = document.querySelector('.glow-2');
+            glow1.style.left = `${e.clientX * 0.05}px`;
+            glow1.style.top = `${e.clientY * 0.05}px`;
+            glow2.style.right = `${window.innerWidth - e.clientX * 0.05}px`;
+            glow2.style.bottom = `${window.innerHeight - e.clientY * 0.05}px`;
+        });
+
+        // Animate cards when they come into view
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.info-card, .therapist-card, .resource-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Set initial state for animation
+        const cards = document.querySelectorAll('.info-card, .therapist-card, .resource-card');
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease';
+        });
+        
+        // Run once on load
+        animateOnScroll();
+        
+        // Then run on scroll
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>

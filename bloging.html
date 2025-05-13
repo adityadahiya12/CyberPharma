@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberHealth Hub | Neural Health Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+            --matrix-green: #00ff9d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight) 0%, #1a1f4a 100%);
+            color: var(--cyber-white);
+            min-height: 100vh;
+        }
+
+        .glow-effect {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .glow-1 { top: 10%; left: 10%; }
+        .glow-2 { bottom: 10%; right: 10%; background: radial-gradient(circle, var(--pulse-pink) 0%, transparent 70%); }
+        .glow-3 { top: 50%; right: 50%; background: radial-gradient(circle, var(--matrix-green) 0%, transparent 70%); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            background: rgba(10, 15, 46, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+            padding: 1.5rem 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--pulse-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cyber-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .search-bar {
+            display: flex;
+            margin: 3rem auto;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            background: rgba(10, 15, 46, 0.5);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            border-radius: 50px;
+            color: var(--cyber-white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 245, 212, 0.2);
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(240, 244, 255, 0.6);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            border: none;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            transform: translateX(5px);
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            background: rgba(138, 158, 255, 0.1);
+            color: var(--cyber-white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            font-size: 0.9rem;
+        }
+
+        .category-tab.active {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            font-weight: 600;
+            border: none;
+        }
+
+        .category-tab:hover:not(.active) {
+            background: rgba(138, 158, 255, 0.2);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .blog-card {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 15px 30px rgba(0, 245, 212, 0.2);
+        }
+
+        .blog-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.1);
+        }
+
+        .blog-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--neon-cyan);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-source {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--neon-cyan);
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .blog-source img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(240, 244, 255, 0.5);
+            font-size: 0.8rem;
+        }
+
+        .load-more {
+            display: block;
+            width: 200px;
+            margin: 3rem auto;
+            background: linear-gradient(90deg, var(--pulse-pink), var(--electric-blue));
+            color: var(--cyber-white);
+            padding: 1rem;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .load-more:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 62, 157, 0.4);
+        }
+
+        footer {
+            background: rgba(10, 15, 46, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--neon-cyan);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: rgba(240, 244, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--neon-cyan);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--cyber-white);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-cyan);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+            color: rgba(240, 244, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    <div class="glow-effect glow-3"></div>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <span>HealthHub blog</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="vitamin.html">Vitaguide+</a></li>
+                    <li><a href="#">Body Systems</a></li>
+                   
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Search neural health database...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="category-tabs">
+            <div class="category-tab active">All Systems</div>
+            <div class="category-tab">Neural Network</div>
+            <div class="category-tab">Dermal Matrix</div>
+            <div class="category-tab">Cardio Core</div>
+            <div class="category-tab">Musculoskeletal</div>
+            <div class="category-tab">Digestive Mainframe</div>
+            <div class="category-tab">Respiratory Array</div>
+        </div>
+
+        <div class="blog-grid">
+            <!-- Skincare Article -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Skincare Science">
+                    <div class="blog-category">Dermal Matrix</div>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-source">
+                        <img src="https://logo.clearbit.com/healthline.com" alt="Healthline">
+                        <span>Healthline Neural Network</span>
+                    </div>
+                    <h3 class="blog-title">Next-Gen Skincare: Biohacking Your Dermal Layer</h3>
+                    <p class="blog-excerpt">Discover how nanotechnology is revolutionizing skincare routines with smart molecules that adapt to your skin's circadian rhythm.</p>
+                    <div class="blog-meta">
+                        <span><i class="far fa-clock"></i> 3 cycles ago</span>
+                        <span><i class="fas fa-share-alt"></i> 1.2K relays</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brain Health Article -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1518481852452-9415b262eba4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Brain Health">
+                    <div class="blog-category">Neural Network</div>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-source">
+                        <img src="https://logo.clearbit.com/webmd.com" alt="WebMD">
+                        <span>WebMD CyberClinic</span>
+                    </div>
+                    <h3 class="blog-title">Neuro-Enhancement: Optimizing Your Brain's BIOS</h3>
+                    <p class="blog-excerpt">Learn about the latest nootropics and neural stimulation techniques to upgrade your cognitive processing power by 37%.</p>
+                    <div class="blog-meta">
+                        <span><i class="far fa-clock"></i> 5 cycles ago</span>
+                        <span><i class="fas fa-share-alt"></i> 2.4K relays</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heart Health Article -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Heart Health">
+                    <div class="blog-category">Cardio Core</div>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-source">
+                        <img src="https://logo.clearbit.com/mayoclinic.org" alt="Mayo Clinic">
+                        <span>Mayo CyberMed</span>
+                    </div>
+                    <h3 class="blog-title">Cardiovascular Overclocking: Safe Heart Rate Optimization</h3>
+                    <p class="blog-excerpt">How elite biohackers are using quantified self-data to safely push their cardiovascular systems to peak efficiency.</p>
+                    <div class="blog-meta">
+                        <span><i class="far fa-clock"></i> 7 cycles ago</span>
+                        <span><i class="fas fa-share-alt"></i> 892 relays</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gut Health Article -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1584473457406-6240486418e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Gut Health">
+                    <div class="blog-category">Digestive Mainframe</div>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-source">
+                        <img src="https://logo.clearbit.com/medicalnewstoday.com" alt="Medical News Today">
+                        <span>MedNews NeuralFeed</span>
+                    </div>
+                    <h3 class="blog-title">Gut Biome 2.0: Reprogramming Your Digestive Firmware</h3>
+                    <p class="blog-excerpt">The future of personalized probiotics and how synthetic biology is creating smart bacteria that adapt to your nutritional needs.</p>
+                    <div class="blog-meta">
+                        <span><i class="far fa-clock"></i> 2 cycles ago</span>
+                        <span><i class="fas fa-share-alt"></i> 1.5K relays</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Muscle Health Article -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Muscle Health">
+                    <div class="blog-category">Musculoskeletal</div>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-source">
+                        <img src="https://logo.clearbit.com/health.harvard.edu" alt="Harvard Health">
+                        <span>Harvard CyberHealth</span>
+                    </div>
+                    <h3 class="blog-title">Myofibril Optimization: Next-Level Protein Synthesis</h3>
+                    <p class="blog-excerpt">Breakthrough research in muscle protein synthesis could lead to 40% faster recovery times and enhanced strength gains.</p>
+                    <div class="blog-meta">
+                        <span><i class="far fa-clock"></i> 4 cycles ago</span>
+                        <span><i class="fas fa-share-alt"></i> 3.1K relays</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Respiratory Health Article -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Respiratory Health">
+                    <div class="blog-category">Respiratory Array</div>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-source">
+                        <img src="https://logo.clearbit.com/nih.gov" alt="NIH">
+                        <span>NIH BioNet</span>
+                    </div>
+                    <h3 class="blog-title">Lung Capacity 2.0: Breathing Techniques of the Future</h3>
+                    <p class="blog-excerpt">How astronauts and elite athletes are using advanced breathing protocols to increase oxygen efficiency by up to 28%.</p>
+                    <div class="blog-meta">
+                        <span><i class="far fa-clock"></i> 6 cycles ago</span>
+                        <span><i class="fas fa-share-alt"></i> 2.7K relays</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="load-more">LOAD MORE ARTICLES <i class="fas fa-arrow-down"></i></a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>CyberHealth Hub</h3>
+                <p>Aggregating the latest health research from across the neural network to optimize your biological systems.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Body Systems</h3>
+                <ul>
+                    <li><a href="#">Neural Network</a></li>
+                    <li><a href="#">Dermal Matrix</a></li>
+                    <li><a href="#">Cardio Core</a></li>
+                    <li><a href="#">Musculoskeletal</a></li>
+                    <li><a href="#">Digestive Mainframe</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Research Database</a></li>
+                    <li><a href="#">Biohacking Tools</a></li>
+                    <li><a href="#">Health Trackers</a></li>
+                    <li><a href="#">CyberClinics</a></li>
+                    <li><a href="#">Neural Forums</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="#">Our Network</a></li>
+                    <li><a href="#">Privacy Protocol</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Contact Nodes</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 |CyberPharma | CyberHealth Hub - All systems operational
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        const tabs = document.querySelectorAll('.category-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                // In a real app, you would filter content here
+                console.log(`Filtering by: ${tab.textContent}`);
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-bar input');
+        const searchBtn = document.querySelector('.search-bar button');
+        
+        searchBtn.addEventListener('click', () => {
+            if (searchInput.value.trim()) {
+                console.log(`Searching for: ${searchInput.value}`);
+                // In a real app, you would search content here
+            }
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && searchInput.value.trim()) {
+                console.log(`Searching for: ${searchInput.value}`);
+                // In a real app, you would search content here
+            }
+        });
+
+        // Load more functionality
+        const loadMoreBtn = document.querySelector('.load-more');
+        loadMoreBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Loading more articles...');
+            // In a real app, you would load more content here
+        });
+    </script>
+</body>
+</html>

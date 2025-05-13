@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RX-DELIVERY | CyberPharma Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+            --matrix-green: #00ff9d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight), #1a1f4a);
+            color: var(--cyber-white);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            overflow-x: hidden;
+        }
+
+        .glow {
+            position: fixed;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+        .glow:nth-child(1) { top: 5%; left: 10%; }
+        .glow:nth-child(2) { bottom: 10%; right: 15%; background: radial-gradient(circle, var(--pulse-pink) 0%, transparent 70%); }
+        .glow:nth-child(3) { top: 50%; right: 50%; background: radial-gradient(circle, var(--matrix-green) 0%, transparent 70%); }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(10, 15, 46, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            transition: 0.4s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--electric-blue), var(--neon-cyan));
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .header i {
+            background: linear-gradient(135deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 40px;
+        }
+
+        .header h1 {
+            margin-top: 10px;
+            font-size: 28px;
+            background: linear-gradient(90deg, var(--cyber-white), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin-top: 8px;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--neon-cyan);
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(138, 158, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(10, 15, 46, 0.5);
+            color: var(--cyber-white);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 8px var(--neon-cyan);
+        }
+
+        input::placeholder {
+            color: rgba(240, 244, 255, 0.5);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--pulse-pink), var(--electric-blue));
+            border: none;
+            border-radius: 10px;
+            color: var(--cyber-white);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 62, 157, 0.4);
+        }
+
+        .popular-searches {
+            margin: 30px 0;
+        }
+
+        .popular-searches h3 {
+            font-size: 14px;
+            color: var(--neon-cyan);
+            margin-bottom: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .popular-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: rgba(138, 158, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--cyber-white);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: rgba(0, 245, 212, 0.2);
+            border-color: var(--neon-cyan);
+            transform: scale(1.05);
+        }
+
+        .disclaimer {
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: center;
+            color: rgba(240, 244, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        .powered-by {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: rgba(240, 244, 255, 0.5);
+        }
+
+        .powered-by img {
+            height: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        @media(max-width:600px){
+            .content{padding:20px;}
+            .header{padding:25px 20px;}
+            input{padding:12px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+    <div class="glow"></div>
+    <div class="glow"></div>
+
+    <div class="container">
+        <div class="header">
+            <i class="fas fa-prescription-bottle-alt"></i>
+            <h1>RX DELIVERY</h1>
+            <p>medicine delivery online</p>
+        </div>
+        <div class="content">
+            <div class="input-group">
+                <label for="medicineName">MEDICINE NAME</label>
+                <input type="text" id="medicineName" placeholder="e.g. Neurozyme-X, BioBoost-N...">
+            </div>
+
+            <div class="popular-searches">
+                <h3><i class="fas fa-bolt"></i> FREQUENT ORDERS</h3>
+                <div class="popular-tags">
+                    <div class="tag" onclick="setMedicine('Neurozyme-X 500mg')">Neurozyme-X</div>
+                    <div class="tag" onclick="setMedicine('BioBoost-N Capsules')">BioBoost-N</div>
+                    <div class="tag" onclick="setMedicine('CycloViral Inhibitor')">CycloViral</div>
+                </div>
+            </div>
+
+            <button class="btn" id="searchButton" onclick="redirectToPharmEasy()">
+                ORDER RX DELIVERY <i class="fas fa-paper-plane"></i>
+            </button>
+
+            <p class="disclaimer">*Orders secured with blockchain technology<br>**Delivery times may vary during peak hours</p>
+            <div class="powered-by">
+                <span>POWERED BY</span>
+                <img src="https://assets.pharmeasy.in/web-assets/dist/4d2f7c48.svg" alt="PharmEasy">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const medicineInput = document.getElementById('medicineName');
+
+        function setMedicine(name){
+            medicineInput.value = name;
+            medicineInput.focus();
+        }
+
+        function redirectToPharmEasy(){
+            const medicineName = medicineInput.value.trim();
+            if(!medicineName){
+                alert('Please enter a medicine name!');
+                return;
+            }
+            const encodedName = encodeURIComponent(medicineName);
+            window.location.href = `https://pharmeasy.in/search/all?name=${encodedName}`;
+        }
+    </script>
+</body>
+</html>

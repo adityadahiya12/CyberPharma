@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Reminder | CyberPharma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Tumhare home.html wale styles copy karo */
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+            --cyber-purple: #8a2be2;
+            --emergency-red: #ff3a3a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight) 0%, #1a1f4a 100%);
+            color: var(--cyber-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Header same rakho tumhare home.html jaisa */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+            position: relative;
+            z-index: 100;
+        }
+
+        /* Reminder form ke liye custom styles */
+        .reminder-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .reminder-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--neon-cyan);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--cyber-white);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 245, 212, 0.2);
+        }
+
+        .save-btn {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 107, 255, 0.6);
+        }
+
+        .success-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 245, 212, 0.1);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="home.html" class="logo">
+                <i class="fas fa-prescription-bottle-alt"></i>
+                <span>CyberPharma</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="consult.html">Doctors</a></li>
+                    <li><a href="labttest.html">Lab Tests</a></li>
+                    <li><a href="bloging.html">Health Blog</a></li>
+                    <li><a href="blood.html">E-blood</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                </ul>
+            </nav>
+            <a href="login1.html" class="cta-button">Get Started</a>
+        </header>
+
+        <div class="reminder-container">
+            <h1 class="reminder-title">Medicine Reminder</h1>
+            
+            <div class="form-group">
+                <label for="medicine-name">Medicine Name</label>
+                <input type="text" id="medicine-name" placeholder="Enter medicine name (e.g., Paracetamol)">
+            </div>
+            
+            <div class="form-group">
+                <label for="reminder-time">Reminder Time</label>
+                <input type="time" id="reminder-time">
+            </div>
+            
+            <button class="save-btn" id="save-btn">
+                <i class="fas fa-bell"></i> Set Reminder
+            </button>
+            
+            <div class="success-message" id="success-message">
+                Reminder set for <span id="med-name"></span> at <span id="med-time"></span> ✅
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('save-btn').addEventListener('click', function() {
+            const medicineName = document.getElementById('medicine-name').value;
+            const reminderTime = document.getElementById('reminder-time').value;
+            
+            if (medicineName && reminderTime) {
+                document.getElementById('med-name').textContent = medicineName;
+                document.getElementById('med-time').textContent = reminderTime;
+                document.getElementById('success-message').style.display = 'block';
+                
+                // Yahan pe tum actual reminder logic add kar sakte ho
+                // For example: localStorage mein save karna
+                localStorage.setItem('medicineReminder', JSON.stringify({
+                    name: medicineName,
+                    time: reminderTime
+                }));
+                
+                // Notification dikhana
+                alert(`Reminder set for ${medicineName} at ${reminderTime}`);
+            } else {
+                alert('Please fill both medicine name and time!');
+            }
+        });
+        
+        // Agar pehle se saved reminder hai to show karo
+        window.addEventListener('load', function() {
+            const savedReminder = localStorage.getItem('medicineReminder');
+            if (savedReminder) {
+                const reminder = JSON.parse(savedReminder);
+                document.getElementById('medicine-name').value = reminder.name;
+                document.getElementById('reminder-time').value = reminder.time;
+                document.getElementById('med-name').textContent = reminder.name;
+                document.getElementById('med-time').textContent = reminder.time;
+                document.getElementById('success-message').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

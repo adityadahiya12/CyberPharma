@@ -1,0 +1,20 @@
+{
+  "name": "CyberPharma",
+  "short_name": "CyberPharma",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0f2e",
+  "theme_color": "#4a6bff",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

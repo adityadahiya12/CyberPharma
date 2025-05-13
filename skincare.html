@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowLab | AI-Powered Skincare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+            --bio-green: #00ffaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight) 0%, #1a1f4a 100%);
+            color: var(--cyber-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glow-effect {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .glow-1 { top: -50px; left: -50px; }
+        .glow-2 { bottom: -50px; right: -50px; background: radial-gradient(circle, var(--pulse-pink) 0%, transparent 70%); }
+        .glow-3 { top: 50%; left: 30%; background: radial-gradient(circle, var(--bio-green) 0%, transparent 70%); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--pulse-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--cyber-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--neon-cyan);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(90deg, var(--pulse-pink), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 62, 157, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 62, 157, 0.6);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 5rem 0;
+            gap: 3rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--cyber-white), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(240, 244, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .skin-type-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .skin-btn {
+            background: rgba(138, 158, 255, 0.1);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            color: var(--cyber-white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skin-btn.active {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            border: none;
+            font-weight: 600;
+        }
+
+        .skin-btn:hover:not(.active) {
+            background: rgba(138, 158, 255, 0.2);
+        }
+
+        /* ROUTINE STEPS */
+        .routine-section {
+            margin: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, var(--pulse-pink), var(--bio-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .routine-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-cyan);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+        }
+
+        .step-card p {
+            color: rgba(240, 244, 255, 0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-card {
+            background: rgba(0, 245, 212, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-left: 3px solid var(--bio-green);
+        }
+
+        .product-card h4 {
+            color: var(--bio-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* PRODUCT SHOWCASE */
+        .products-section {
+            margin: 5rem 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-item {
+            background: rgba(138, 158, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(74, 107, 255, 0.2);
+        }
+
+        .product-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            color: var(--neon-cyan);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .skin-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .oily-badge {
+            background: rgba(74, 107, 255, 0.2);
+            color: var(--soft-glitch);
+        }
+
+        .dry-badge {
+            background: rgba(255, 62, 157, 0.2);
+            color: var(--pulse-pink);
+        }
+
+        .normal-badge {
+            background: rgba(0, 245, 212, 0.2);
+            color: var(--neon-cyan);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--cyber-white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-cyan);
+            transform: translateY(-3px);
+        }
+
+        footer p {
+            color: rgba(240, 244, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+            }
+
+            .skin-type-selector {
+                flex-wrap: wrap;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    <div class="glow-effect glow-3"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-atom"></i>
+                <span>Cyberpharma </span>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="#">Routines</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="vitamin.html">VitaGuide</a></li>
+                </ul>
+            </nav>
+            <button class="cta-button">hey!</button>
+        </header>
+
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Glowlab - <br><span class="gradient-text">Introduce by the cyberpharma </span></h1>
+                <p>Bio-hacked skincare routines powered by AI. Get personalized regimens for your exact skin type.</p>
+                
+                <div class="skin-type-selector">
+                    <button class="skin-btn active" onclick="showRoutine('oily')">Oily Skin</button>
+                    <button class="skin-btn" onclick="showRoutine('dry')">Dry Skin</button>
+                    <button class="skin-btn" onclick="showRoutine('normal')">Normal Skin</button>
+                </div>
+
+                <button class="cta-button">
+                    <i class="fas fa-dna"></i> Get Custom Routine
+                </button>
+            </div>
+            <div class="hero-image">
+              
+            </div>
+        </section>
+
+        <section class="routine-section">
+            <h2 class="section-title">The Perfect Routine</h2>
+            <div class="routine-steps" id="routineContainer">
+                <!-- Oily Skin Routine (Default) -->
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Cleanse</h3>
+                    <p>Start with a foaming cleanser to remove excess oil without stripping skin.</p>
+                    <div class="product-card">
+                        <h4>Neutrogena Oil-Free Acne Wash</h4>
+                        <p>Salicylic acid formula prevents breakouts</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Tone</h3>
+                    <p>Alcohol-free toner to balance pH and minimize pores.</p>
+                    <div class="product-card">
+                        <h4>Paula's Choice Pore-Reducing Toner</h4>
+                        <p>With niacinamide for oil control</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Treat</h3>
+                    <p>Lightweight serum to target specific concerns like acne or hyperpigmentation.</p>
+                    <div class="product-card">
+                        <h4>The Ordinary Niacinamide 10% + Zinc 1%</h4>
+                        <p>Regulates sebum production</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Moisturize</h3>
+                    <p>Oil-free, non-comedogenic moisturizer to hydrate without clogging pores.</p>
+                    <div class="product-card">
+                        <h4>La Roche-Posay Effaclar Mat</h4>
+                        <p>Mattifying moisturizer with sebum control</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3>Protect</h3>
+                    <p>Lightweight sunscreen to prevent sun damage and premature aging.</p>
+                    <div class="product-card">
+                        <h4>Biore UV Aqua Rich Watery Essence</h4>
+                        <p>SPF50+ PA++++, non-greasy</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <h2 class="section-title">Curated Products</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <div class="product-image" style="background-image: url('https://m.media-amazon.com/images/I/61g+McQpg3L._SL1500_.jpg');"></div>
+                    <div class="product-info">
+                        <h3>CeraVe Foaming Cleanser</h3>
+                        <p>For normal to oily skin</p>
+                        <span class="product-price">$14.99</span>
+                        <div class="skin-badge oily-badge">OILY</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-image" style="background-image: url('https://m.media-amazon.com/images/I/71W7JQDJKQL._SL1500_.jpg');"></div>
+                    <div class="product-info">
+                        <h3>First Aid Beauty Ultra Repair Cream</h3>
+                        <p>Intense hydration for dry skin</p>
+                        <span class="product-price">$38.00</span>
+                        <div class="skin-badge dry-badge">DRY</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-image" style="background-image: url('https://m.media-amazon.com/images/I/61yV9cCqVVL._SL1500_.jpg');"></div>
+                    <div class="product-info">
+                        <h3>Glow Recipe Watermelon Glow Niacinamide Dew Drops</h3>
+                        <p>For all skin types</p>
+                        <span class="product-price">$34.00</span>
+                        <div class="skin-badge normal-badge">NORMAL</div>
+                    </div>
+                </div>
+                <div class="product-item">
+                    <div class="product-image" style="background-image: url('https://m.media-amazon.com/images/I/71X9N8zD6VL._SL1500_.jpg');"></div>
+                    <div class="product-info">
+                        <h3>Drunk Elephant Protini Polypeptide Cream</h3>
+                        <p>Peptide-rich moisturizer</p>
+                        <span class="product-price">$68.00</span>
+                        <div class="skin-badge normal-badge">NORMAL</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+            <p>© 2025 Cyberpharma | Glowlab-Future-Proof Skincare</p>
+        </footer>
+    </div>
+
+    <script>
+        // Skin type selector functionality
+        function showRoutine(skinType) {
+            const buttons = document.querySelectorAll('.skin-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // In a real app, you would fetch different routines from a database
+            // Here's a simplified version that just changes some text
+            const routineContainer = document.getElementById('routineContainer');
+            
+            if (skinType === 'dry') {
+                routineContainer.innerHTML = `
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Cleanse</h3>
+                        <p>Use a creamy, non-foaming cleanser that won't strip natural oils.</p>
+                        <div class="product-card">
+                            <h4>CeraVe Hydrating Cleanser</h4>
+                            <p>With ceramides and hyaluronic acid</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Hydrate</h3>
+                        <p>Apply a hydrating toner or essence to prep skin.</p>
+                        <div class="product-card">
+                            <h4>Klairs Supple Preparation Toner</h4>
+                            <p>Alcohol-free hydration boost</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Treat</h3>
+                        <p>Rich serum with hyaluronic acid and ceramides.</p>
+                        <div class="product-card">
+                            <h4>The Ordinary Hyaluronic Acid 2% + B5</h4>
+                            <p>Intense hydration serum</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>Moisturize</h3>
+                        <p>Thick cream to lock in moisture and repair barrier.</p>
+                        <div class="product-card">
+                            <h4>First Aid Beauty Ultra Repair Cream</h4>
+                            <p>With colloidal oatmeal</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h3>Protect</h3>
+                        <p>Creamy sunscreen that won't dry out skin.</p>
+                        <div class="product-card">
+                            <h4>La Roche-Posay Toleriane Double Repair UV</h4>
+                            <p>SPF30 moisturizer</p>
+                        </div>
+                    </div>
+                `;
+            } else if (skinType === 'normal') {
+                routineContainer.innerHTML = `
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Cleanse</h3>
+                        <p>Gentle cleanser that maintains skin's natural balance.</p>
+                        <div class="product-card">
+                            <h4>Fresh Soy Face Cleanser</h4>
+                            <p>pH-balanced formula</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Tone</h3>
+                        <p>Lightweight toner to refresh and prep skin.</p>
+                        <div class="product-card">
+                            <h4>Glow Recipe Watermelon Glow PHA+BHA Toner</h4>
+                            <p>Gentle exfoliation</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Treat</h3>
+                        <p>Antioxidant serum for prevention and glow.</p>
+                        <div class="product-card">
+                            <h4>Glow Recipe Watermelon Glow Niacinamide Dew Drops</h4>
+                            <p>Brightening serum</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>Moisturize</h3>
+                        <p>Lightweight lotion to maintain hydration.</p>
+                        <div class="product-card">
+                            <h4>Belif The True Cream Aqua Bomb</h4>
+                            <p>Water-gel moisturizer</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h3>Protect</h3>
+                        <p>Broad spectrum sunscreen for daily wear.</p>
+                        <div class="product-card">
+                            <h4>Supergoop! Unseen Sunscreen</h4>
+                            <p>SPF40, completely invisible</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Default to oily skin routine
+                routineContainer.innerHTML = `
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Cleanse</h3>
+                        <p>Start with a foaming cleanser to remove excess oil without stripping skin.</p>
+                        <div class="product-card">
+                            <h4>Neutrogena Oil-Free Acne Wash</h4>
+                            <p>Salicylic acid formula prevents breakouts</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Tone</h3>
+                        <p>Alcohol-free toner to balance pH and minimize pores.</p>
+                        <div class="product-card">
+                            <h4>Paula's Choice Pore-Reducing Toner</h4>
+                            <p>With niacinamide for oil control</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Treat</h3>
+                        <p>Lightweight serum to target specific concerns like acne or hyperpigmentation.</p>
+                        <div class="product-card">
+                            <h4>The Ordinary Niacinamide 10% + Zinc 1%</h4>
+                            <p>Regulates sebum production</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>Moisturize</h3>
+                        <p>Oil-free, non-comedogenic moisturizer to hydrate without clogging pores.</p>
+                        <div class="product-card">
+                            <h4>La Roche-Posay Effaclar Mat</h4>
+                            <p>Mattifying moisturizer with sebum control</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h3>Protect</h3>
+                        <p>Lightweight sunscreen to prevent sun damage and premature aging.</p>
+                        <div class="product-card">
+                            <h4>Biore UV Aqua Rich Watery Essence</h4>
+                            <p>SPF50+ PA++++, non-greasy</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Glow effect follow mouse
+        document.addEventListener('mousemove', (e) => {
+            const glow1 = document.querySelector('.glow-1');
+            const glow2 = document.querySelector('.glow-2');
+            glow1.style.left = `${e.clientX * 0.05}px`;
+            glow1.style.top = `${e.clientY * 0.05}px`;
+            glow2.style.right = `${window.innerWidth - e.clientX * 0.05}px`;
+            glow2.style.bottom = `${window.innerHeight - e.clientY * 0.05}px`;
+        });
+    </script>
+</body>
+</html>

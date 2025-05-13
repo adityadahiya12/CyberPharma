@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaGuide | AI-Powered Nutrition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+            --bio-green: #00ffaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight) 0%, #1a1f4a 100%);
+            color: var(--cyber-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glow-effect {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .glow-1 { top: -50px; left: -50px; }
+        .glow-2 { bottom: -50px; right: -50px; background: radial-gradient(circle, var(--pulse-pink) 0%, transparent 70%); }
+        .glow-3 { top: 50%; left: 30%; background: radial-gradient(circle, var(--bio-green) 0%, transparent 70%); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--pulse-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--cyber-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--neon-cyan);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(90deg, var(--pulse-pink), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 62, 157, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 62, 157, 0.6);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 5rem 0;
+            gap: 3rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--cyber-white), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(240, 244, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .search-input {
+            flex: 1;
+            background: rgba(138, 158, 255, 0.1);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            color: var(--cyber-white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+        }
+
+        .search-btn {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 0 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .nutrient-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .nutrient-tag {
+            background: rgba(138, 158, 255, 0.1);
+            border: 1px solid rgba(138, 158, 255, 0.3);
+            color: var(--cyber-white);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nutrient-tag.active {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            border: none;
+            font-weight: 600;
+        }
+
+        .nutrient-tag:hover:not(.active) {
+            background: rgba(138, 158, 255, 0.2);
+        }
+
+        /* RECOMMENDATION SECTION */
+        .recommendation-section {
+            margin: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, var(--pulse-pink), var(--bio-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .recommendation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .recommendation-card {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-cyan);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .nutrient-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .recommendation-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-cyan);
+        }
+
+        .recommendation-card p {
+            color: rgba(240, 244, 255, 0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .food-list {
+            margin-top: 1.5rem;
+        }
+
+        .food-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.1);
+        }
+
+        .food-item:last-child {
+            border-bottom: none;
+        }
+
+        .food-name {
+            color: var(--cyber-white);
+            font-weight: 500;
+        }
+
+        .food-amount {
+            color: var(--bio-green);
+            font-weight: 600;
+        }
+
+        .supplement-card {
+            background: rgba(0, 245, 212, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-left: 3px solid var(--bio-green);
+        }
+
+        .supplement-card h4 {
+            color: var(--bio-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .supplement-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .supplement-dosage {
+            font-size: 0.8rem;
+            color: var(--soft-glitch);
+        }
+
+        /* DIET PLAN SECTION */
+        .diet-section {
+            margin: 5rem 0;
+        }
+
+        .diet-plan {
+            background: rgba(138, 158, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .diet-header {
+            background: rgba(74, 107, 255, 0.2);
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .diet-title {
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .diet-description {
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .diet-meals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .meal-card {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.1);
+            border-right: 1px solid rgba(138, 158, 255, 0.1);
+        }
+
+        .meal-card:last-child {
+            border-right: none;
+        }
+
+        .meal-time {
+            color: var(--pulse-pink);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meal-time i {
+            font-size: 1.2rem;
+        }
+
+        .meal-items {
+            list-style-type: none;
+        }
+
+        .meal-item {
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .meal-item-name {
+            color: var(--cyber-white);
+        }
+
+        .meal-item-amount {
+            color: var(--bio-green);
+        }
+
+        /* TIPS SECTION */
+        .tips-section {
+            margin: 5rem 0;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tip-card {
+            background: rgba(138, 158, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(74, 107, 255, 0.2);
+        }
+
+        .tip-icon {
+            font-size: 2rem;
+            color: var(--pulse-pink);
+            margin-bottom: 1rem;
+        }
+
+        .tip-card h3 {
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+        }
+
+        .tip-card p {
+            color: rgba(240, 244, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* HEALTH METER */
+        .health-meter {
+            background: linear-gradient(90deg, rgba(74, 107, 255, 0.2), rgba(0, 245, 212, 0.2));
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            border: 1px solid rgba(138, 158, 255, 0.3);
+        }
+
+        .meter-title {
+            color: var(--cyber-white);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .meter-bar {
+            height: 20px;
+            background: rgba(138, 158, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .meter-progress {
+            height: 100%;
+            width: 75%;
+            background: linear-gradient(90deg, var(--pulse-pink), var(--bio-green));
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .meter-reading {
+            color: var(--neon-cyan);
+            font-weight: 600;
+        }
+
+        .meter-description {
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--cyber-white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-cyan);
+            transform: translateY(-3px);
+        }
+
+        footer p {
+            color: rgba(240, 244, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .search-btn {
+                padding: 0.8rem 1.5rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+    <div class="glow-effect glow-3"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-dna"></i>
+                <span>Cyberpharma </span>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="skincare.html">GlowLab</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="vitamin.html">VitaGuide</a></li>
+                </ul>
+            </nav>
+            <button class="cta-button">Get Started</button>
+        </header>
+
+        <section class="hero">
+            <div class="hero-text">
+                <h1>VitaGuide - <br><span class="gradient-text">AI-Powered Nutrition</span></h1>
+                <p>Discover optimal nutrition sources, personalized diet plans, and supplement recommendations tailored to your health goals.</p>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search for vitamins, minerals, or nutrients...">
+                    <button class="search-btn">Analyze</button>
+                </div>
+
+                <div class="nutrient-tags">
+                    <div class="nutrient-tag active" onclick="showRecommendation('vitamin-d')">Vitamin D</div>
+                    <div class="nutrient-tag" onclick="showRecommendation('iron')">Iron</div>
+                    <div class="nutrient-tag" onclick="showRecommendation('protein')">Protein</div>
+                    <div class="nutrient-tag" onclick="showRecommendation('omega3')">Omega-3</div>
+                    <div class="nutrient-tag" onclick="showRecommendation('magnesium')">Magnesium</div>
+                    <div class="nutrient-tag" onclick="showRecommendation('vitamin-c')">Vitamin C</div>
+                </div>
+
+                <button class="cta-button">
+                    <i class="fas fa-user-md"></i> Get Personalized Plan
+                </button>
+            </div>
+            <div class="hero-image">
+                <!-- Placeholder for nutrition visualization -->
+            </div>
+        </section>
+
+        <section class="health-meter">
+            <h3 class="meter-title">Your Nutrition Score</h3>
+            <div class="meter-bar">
+                <div class="meter-progress" id="nutritionScore"></div>
+            </div>
+            <div class="meter-reading">75% Balanced</div>
+            <p class="meter-description">Based on your recent inputs, your diet is well-balanced but could use more variety in micronutrients.</p>
+        </section>
+
+        <section class="recommendation-section" id="recommendationContainer">
+            <h2 class="section-title">Vitamin D Recommendations</h2>
+            <div class="recommendation-cards">
+                <div class="recommendation-card">
+                    <div class="card-header">
+                        <div class="nutrient-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div>
+                            <h3>Vitamin D</h3>
+                            <p>Essential for bone health and immune function</p>
+                        </div>
+                    </div>
+                    <p>Vitamin D helps your body absorb calcium and supports immune system function. Many people are deficient, especially in winter months.</p>
+                    
+                    <div class="food-list">
+                        <h4>Top Food Sources:</h4>
+                        <div class="food-item">
+                            <span class="food-name">Fatty Fish (Salmon)</span>
+                            <span class="food-amount">570 IU per 3oz</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-name">Fortified Milk</span>
+                            <span class="food-amount">120 IU per cup</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-name">Egg Yolks</span>
+                            <span class="food-amount">44 IU per egg</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-name">Mushrooms</span>
+                            <span class="food-amount">400 IU per 1/2 cup</span>
+                        </div>
+                    </div>
+                    
+                    <div class="supplement-card">
+                        <h4>Supplement Recommendation</h4>
+                        <p>Nature Made Vitamin D3 2000 IU</p>
+                        <p class="supplement-dosage">Daily dosage: 1 softgel with a meal</p>
+                    </div>
+                </div>
+                
+                <div class="recommendation-card">
+                    <div class="card-header">
+                        <div class="nutrient-icon">
+                            <i class="fas fa-bone"></i>
+                        </div>
+                        <div>
+                            <h3>Calcium + D Combo</h3>
+                            <p>For optimal bone health</p>
+                        </div>
+                    </div>
+                    <p>Vitamin D enhances calcium absorption. This combination is particularly important for women and older adults.</p>
+                    
+                    <div class="food-list">
+                        <h4>Calcium-Rich Foods:</h4>
+                        <div class="food-item">
+                            <span class="food-name">Dairy Products</span>
+                            <span class="food-amount">300mg per serving</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-name">Leafy Greens</span>
+                            <span class="food-amount">100-200mg per cup</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-name">Almonds</span>
+                            <span class="food-amount">75mg per oz</span>
+                        </div>
+                    </div>
+                    
+                    <div class="supplement-card">
+                        <h4>Supplement Recommendation</h4>
+                        <p>Citracal Calcium + D3</p>
+                        <p class="supplement-dosage">Daily dosage: 2 tablets with food</p>
+                    </div>
+                </div>
+                
+                <div class="recommendation-card">
+                    <div class="card-header">
+                        <div class="nutrient-icon">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                        <div>
+                            <h3>Sunlight Exposure</h3>
+                            <p>Natural vitamin D production</p>
+                        </div>
+                    </div>
+                    <p>Your skin produces vitamin D when exposed to sunlight. The amount varies by skin tone, location, and season.</p>
+                    
+                    <div class="food-list">
+                        <h4>Optimal Exposure:</h4>
+                        <div class="food-item">
+                            <span class="food-name">Fair Skin</span>
+                            <span class="food-amount">10-15 mins midday</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-name">Medium Skin</span>
+                            <span class="food-amount">15-20 mins midday</span>
+                        </div>
+                        <div class="food-item">
+                            <span class="food-name">Dark Skin</span>
+                            <span class="food-amount">30+ mins midday</span>
+                        </div>
+                    </div>
+                    
+                    <div class="supplement-card">
+                        <h4>Important Note</h4>
+                        <p>During winter months or if you have limited sun exposure, supplementation is recommended.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="diet-section">
+            <h2 class="section-title">Sample Diet Plan</h2>
+            <div class="diet-plan">
+                <div class="diet-header">
+                    <h3 class="diet-title">Vitamin D Boost Plan</h3>
+                    <p class="diet-description">A one-day meal plan rich in vitamin D and supporting nutrients</p>
+                </div>
+                <div class="diet-meals">
+                    <div class="meal-card">
+                        <div class="meal-time">
+                            <i class="fas fa-sun"></i>
+                            Breakfast
+                        </div>
+                        <ul class="meal-items">
+                            <li class="meal-item">
+                                <span class="meal-item-name">Fortified cereal</span>
+                                <span class="meal-item-amount">1 cup</span>
+                            </li>
+                            <li class="meal-item">
+                                <span class="meal-item-name">Fortified milk</span>
+                                <span class="meal-item-amount">1 cup</span>
+                            </li>
+                            <li class="meal-item">
+                                <span class="meal-item-name">Orange juice (fortified)</span>
+                                <span class="meal-item-amount">8 oz</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <div class="meal-time">
+                            <i class="fas fa-utensils"></i>
+                            Lunch
+                        </div>
+                        <ul class="meal-items">
+                            <li class="meal-item">
+                                <span class="meal-item-name">Grilled salmon</span>
+                                <span class="meal-item-amount">4 oz</span>
+                            </li>
+                            <li class="meal-item">
+                                <span class="meal-item-name">Sauteed mushrooms</span>
+                                <span class="meal-item-amount">1/2 cup</span>
+                            </li>
+                            <li class="meal-item">
+                                <span class="meal-item-name">Spinach salad</span>
+                                <span class="meal-item-amount">2 cups</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <div class="meal-time">
+                            <i class="fas fa-moon"></i>
+                            Dinner
+                        </div>
+                        <ul class="meal-items">
+                            <li class="meal-item">
+                                <span class="meal-item-name">Sardines on toast</span>
+                                <span class="meal-item-amount">3 oz fish</span>
+                            </li>
+                            <li class="meal-item">
+                                <span class="meal-item-name">Roasted sweet potatoes</span>
+                                <span class="meal-item-amount">1/2 cup</span>
+                            </li>
+                            <li class="meal-item">
+                                <span class="meal-item-name">Fortified yogurt</span>
+                                <span class="meal-item-amount">1 cup</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="meal-card">
+                        <div class="meal-time">
+                            <i class="fas fa-apple-alt"></i>
+                            Snacks
+                        </div>
+                        <ul class="meal-items">
+                            <li class="meal-item">
+                                <span class="meal-item-name">Hard-boiled eggs</span>
+                                <span class="meal-item-amount">2</span>
+                            </li>
+                            <li class="meal-item">
+                                <span class="meal-item-name">Cheese cubes</span>
+                                <span class="meal-item-amount">1 oz</span>
+                            </li>
+                            <li class="meal-item">
+                                <span class="meal-item-name">Almonds</span>
+                                <span class="meal-item-amount">1/4 cup</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tips-section">
+            <h2 class="section-title">Nutrition Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Timing Matters</h3>
+                    <p>Take fat-soluble vitamins (A, D, E, K) with meals containing healthy fats to enhance absorption. Water-soluble vitamins (B, C) are best taken in divided doses throughout the day.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Synergistic Nutrients</h3>
+                    <p>Pair iron with vitamin C for better absorption. Magnesium helps activate vitamin D in the body. Zinc and copper should be balanced in a 10:1 ratio.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Whole Food First</h3>
+                    <p>Always prioritize getting nutrients from whole foods. Supplements should complement, not replace, a balanced diet. Food provides complex nutrient matrices that work synergistically.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3>Test Don't Guess</h3>
+                    <p>Get blood work done before starting new supplements, especially for vitamin D, B12, iron, and magnesium. This prevents unnecessary supplementation and potential toxicity.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                    </div>
+                    <h3>Quality Supplements</h3>
+                    <p>Look for third-party tested supplements (USP, NSF, or ConsumerLab certified). Avoid proprietary blends that don't disclose exact amounts of ingredients.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-allergies"></i>
+                    </div>
+                    <h3>Bioavailability</h3>
+                    <p>Choose methylated B vitamins (methylfolate, methylcobalamin) if you have MTHFR mutations. Opt for chelated minerals (glycinate, citrate) for better absorption.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+            <p>© 2025 Cyberpharma | VitaGuide - Optimized Nutrition</p>
+        </footer>
+    </div>
+
+    <script>
+        // Nutrient selector functionality
+        function showRecommendation(nutrient) {
+            const tags = document.querySelectorAll('.nutrient-tag');
+            tags.forEach(tag => tag.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // In a real app, you would fetch different recommendations from a database
+            // Here's a simplified version that changes the content
+            const container = document.getElementById('recommendationContainer');
+            const meter = document.getElementById('nutritionScore');
+            
+            if (nutrient === 'iron') {
+                container.innerHTML = `
+                    <h2 class="section-title">Iron Recommendations</h2>
+                    <div class="recommendation-cards">
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-magnet"></i>
+                                </div>
+                                <div>
+                                    <h3>Iron</h3>
+                                    <p>Essential for blood production and oxygen transport</p>
+                                </div>
+                            </div>
+                            <p>Iron is crucial for making hemoglobin. Deficiency can lead to anemia, fatigue, and weakened immunity.</p>
+                            
+                            <div class="food-list">
+                                <h4>Top Food Sources:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Red Meat</span>
+                                    <span class="food-amount">2.5mg per 3oz</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Spinach</span>
+                                    <span class="food-amount">3.2mg per 1/2 cup</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Lentils</span>
+                                    <span class="food-amount">3.3mg per 1/2 cup</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Fortified Cereal</span>
+                                    <span class="food-amount">18mg per serving</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Ferrous Sulfate 325mg</p>
+                                <p class="supplement-dosage">Daily dosage: 1 tablet with vitamin C</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-wine-bottle"></i>
+                                </div>
+                                <div>
+                                    <h3>Vitamin C Combo</h3>
+                                    <p>Enhances iron absorption</p>
+                                </div>
+                            </div>
+                            <p>Vitamin C converts iron into a more absorbable form. Take iron supplements with orange juice or vitamin C.</p>
+                            
+                            <div class="food-list">
+                                <h4>Vitamin C Sources:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Bell Peppers</span>
+                                    <span class="food-amount">95mg per 1/2 cup</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Oranges</span>
+                                    <span class="food-amount">70mg per medium</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Broccoli</span>
+                                    <span class="food-amount">51mg per 1/2 cup</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Nature's Bounty Vitamin C 500mg</p>
+                                <p class="supplement-dosage">Take with iron supplements</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                                <div>
+                                    <h3>Avoid With Iron</h3>
+                                    <p>Substances that inhibit absorption</p>
+                                </div>
+                            </div>
+                            <p>Certain foods and medications can significantly reduce iron absorption and should be avoided when taking iron.</p>
+                            
+                            <div class="food-list">
+                                <h4>Absorption Inhibitors:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Calcium supplements</span>
+                                    <span class="food-amount">Take 2 hours apart</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Coffee/Tea</span>
+                                    <span class="food-amount">Wait 1 hour after</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Antacids</span>
+                                    <span class="food-amount">Avoid concurrent use</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Important Note</h4>
+                                <p>Iron supplements can cause constipation. Increase fiber and water intake, or switch to iron bisglycinate which is gentler.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                meter.style.width = '65%';
+            } else if (nutrient === 'protein') {
+                container.innerHTML = `
+                    <h2 class="section-title">Protein Recommendations</h2>
+                    <div class="recommendation-cards">
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-dumbbell"></i>
+                                </div>
+                                <div>
+                                    <h3>Protein</h3>
+                                    <p>Building blocks for muscles and tissues</p>
+                                </div>
+                            </div>
+                            <p>Protein is essential for muscle repair, enzyme production, and immune function. Needs vary by activity level.</p>
+                            
+                            <div class="food-list">
+                                <h4>Top Food Sources:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Chicken Breast</span>
+                                    <span class="food-amount">26g per 3oz</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Greek Yogurt</span>
+                                    <span class="food-amount">17g per 6oz</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Lentils</span>
+                                    <span class="food-amount">9g per 1/2 cup</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Eggs</span>
+                                    <span class="food-amount">6g per large</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Optimum Nutrition Gold Standard Whey</p>
+                                <p class="supplement-dosage">24g protein per scoop</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <div>
+                                    <h3>Complete Proteins</h3>
+                                    <p>Contain all essential amino acids</p>
+                                </div>
+                            </div>
+                            <p>Animal proteins are complete, while plant proteins often need combining (like rice + beans) to form complete proteins.</p>
+                            
+                            <div class="food-list">
+                                <h4>Complete Plant Sources:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Quinoa</span>
+                                    <span class="food-amount">8g per cup</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Soy Products</span>
+                                    <span class="food-amount">Varies</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Buckwheat</span>
+                                    <span class="food-amount">6g per cup</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Orgain Organic Plant-Based Protein</p>
+                                <p class="supplement-dosage">21g protein per serving</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h3>Timing & Distribution</h3>
+                                    <p>Optimizing protein utilization</p>
+                                </div>
+                            </div>
+                            <p>Spread protein intake evenly throughout the day (20-40g per meal) for optimal muscle protein synthesis.</p>
+                            
+                            <div class="food-list">
+                                <h4>Daily Protein Needs:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Sedentary Adults</span>
+                                    <span class="food-amount">0.8g/kg body weight</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Active Individuals</span>
+                                    <span class="food-amount">1.2-1.7g/kg</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Elderly</span>
+                                    <span class="food-amount">1.0-1.2g/kg</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Important Note</h4>
+                                <p>Excess protein isn't stored as protein - it's converted to energy or fat. Balance is key.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                meter.style.width = '82%';
+            } else if (nutrient === 'omega3') {
+                container.innerHTML = `
+                    <h2 class="section-title">Omega-3 Recommendations</h2>
+                    <div class="recommendation-cards">
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-fish"></i>
+                                </div>
+                                <div>
+                                    <h3>Omega-3 Fatty Acids</h3>
+                                    <p>Essential for brain and heart health</p>
+                                </div>
+                            </div>
+                            <p>Omega-3s reduce inflammation, support brain function, and may lower heart disease risk.</p>
+                            
+                            <div class="food-list">
+                                <h4>Top Food Sources:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Fatty Fish (Salmon)</span>
+                                    <span class="food-amount">1.5-2g per 3oz</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Flaxseeds</span>
+                                    <span class="food-amount">2.3g per tbsp</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Walnuts</span>
+                                    <span class="food-amount">2.5g per oz</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Chia Seeds</span>
+                                    <span class="food-amount">5g per oz</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Nordic Naturals Ultimate Omega</p>
+                                <p class="supplement-dosage">1280mg omega-3 per serving</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div>
+                                    <h3>EPA vs DHA</h3>
+                                    <p>Different benefits of omega-3 types</p>
+                                </div>
+                            </div>
+                            <p>EPA is more anti-inflammatory while DHA is crucial for brain development and function.</p>
+                            
+                            <div class="food-list">
+                                <h4>Source Breakdown:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Fish Oil</span>
+                                    <span class="food-amount">Both EPA & DHA</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Algal Oil</span>
+                                    <span class="food-amount">DHA-focused</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Flaxseed</span>
+                                    <span class="food-amount">ALA (converts poorly)</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Vega Omega-3 EPA & DHA</p>
+                                <p class="supplement-dosage">Plant-based from algae</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <div>
+                                    <h3>Omega-3 to Omega-6 Ratio</h3>
+                                    <p>Modern diets are often imbalanced</p>
+                                </div>
+                            </div>
+                            <p>Ideal ratio is 1:1 to 1:4 omega-3:omega-6. Typical Western diet is 1:15 or higher.</p>
+                            
+                            <div class="food-list">
+                                <h4>Reduce These Omega-6 Sources:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Vegetable Oils</span>
+                                    <span class="food-amount">Corn, soybean, sunflower</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Processed Foods</span>
+                                    <span class="food-amount">Often use these oils</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Fried Foods</span>
+                                    <span class="food-amount">High in omega-6</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Important Note</h4>
+                                <p>High omega-6 intake can negate benefits of omega-3s by promoting inflammation.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                meter.style.width = '58%';
+            } else if (nutrient === 'magnesium') {
+                container.innerHTML = `
+                    <h2 class="section-title">Magnesium Recommendations</h2>
+                    <div class="recommendation-cards">
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div>
+                                    <h3>Magnesium</h3>
+                                    <p>Involved in 300+ biochemical reactions</p>
+                                </div>
+                            </div>
+                            <p>Magnesium supports muscle and nerve function, blood sugar control, and blood pressure regulation.</p>
+                            
+                            <div class="food-list">
+                                <h4>Top Food Sources:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Pumpkin Seeds</span>
+                                    <span class="food-amount">156mg per oz</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Spinach</span>
+                                    <span class="food-amount">78mg per 1/2 cup</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Almonds</span>
+                                    <span class="food-amount">80mg per oz</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Black Beans</span>
+                                    <span class="food-amount">60mg per 1/2 cup</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Natural Calm Magnesium Citrate</p>
+                                <p class="supplement-dosage">325mg per teaspoon</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-moon"></i>
+                                </div>
+                                <div>
+                                    <h3>For Sleep & Relaxation</h3>
+                                    <p>Magnesium glycinate form</p>
+                                </div>
+                            </div>
+                            <p>Magnesium glycinate is highly absorbable and has calming effects on the nervous system.</p>
+                            
+                            <div class="food-list">
+                                <h4>Signs of Deficiency:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Muscle Cramps</span>
+                                    <span class="food-amount">Especially at night</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Insomnia</span>
+                                    <span class="food-amount">Difficulty falling asleep</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Anxiety</span>
+                                    <span class="food-amount">Increased nervousness</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Pure Encapsulations Magnesium Glycinate</p>
+                                <p class="supplement-dosage">120mg per capsule</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-poop"></i>
+                                </div>
+                                <div>
+                                    <h3>Forms & Bioavailability</h3>
+                                    <p>Not all magnesium is equal</p>
+                                </div>
+                            </div>
+                            <p>Different magnesium forms have varying absorption rates and effects on the body.</p>
+                            
+                            <div class="food-list">
+                                <h4>Common Forms:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Citrate</span>
+                                    <span class="food-amount">Good absorption, laxative</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Glycinate</span>
+                                    <span class="food-amount">Highly absorbable, calming</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Oxide</span>
+                                    <span class="food-amount">Poor absorption, laxative</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Malate</span>
+                                    <span class="food-amount">Good for energy/fatigue</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Important Note</h4>
+                                <p>Magnesium can cause loose stools at high doses. Start low and increase gradually.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                meter.style.width = '70%';
+            } else if (nutrient === 'vitamin-c') {
+                container.innerHTML = `
+                    <h2 class="section-title">Vitamin C Recommendations</h2>
+                    <div class="recommendation-cards">
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-shield-virus"></i>
+                                </div>
+                                <div>
+                                    <h3>Vitamin C</h3>
+                                    <p>Powerful antioxidant and immune supporter</p>
+                                </div>
+                            </div>
+                            <p>Vitamin C is essential for immune function, collagen synthesis, and iron absorption.</p>
+                            
+                            <div class="food-list">
+                                <h4>Top Food Sources:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Guava</span>
+                                    <span class="food-amount">377mg per cup</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Bell Peppers</span>
+                                    <span class="food-amount">190mg per cup</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Oranges</span>
+                                    <span class="food-amount">96mg per medium</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Broccoli</span>
+                                    <span class="food-amount">81mg per 1/2 cup</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Pure Encapsulations Vitamin C</p>
+                                <p class="supplement-dosage">1000mg per capsule</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-pills"></i>
+                                </div>
+                                <div>
+                                    <h3>Liposomal Vitamin C</h3>
+                                    <p>Enhanced absorption form</p>
+                                </div>
+                            </div>
+                            <p>Liposomal vitamin C has significantly higher absorption rates compared to standard ascorbic acid.</p>
+                            
+                            <div class="food-list">
+                                <h4>Absorption Rates:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Standard Vitamin C</span>
+                                    <span class="food-amount">~20% absorbed</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Liposomal Vitamin C</span>
+                                    <span class="food-amount">~90% absorbed</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>LivOn Labs Lypo-Spheric Vitamin C</p>
+                                <p class="supplement-dosage">1000mg per packet</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h3>Dosing Strategy</h3>
+                                    <p>Frequent small doses are best</p>
+                                </div>
+                            </div>
+                            <p>Vitamin C is water-soluble and excreted within hours. Divided doses maintain optimal levels.</p>
+                            
+                            <div class="food-list">
+                                <h4>Optimal Dosing:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Daily Maintenance</span>
+                                    <span class="food-amount">250-500mg 2-3x/day</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Immune Support</span>
+                                    <span class="food-amount">500-1000mg every 4 hours</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Tolerance Level</span>
+                                    <span class="food-amount">Increase until loose stools</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Important Note</h4>
+                                <p>Vitamin C enhances iron absorption but may interfere with certain medications like chemotherapy drugs.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                meter.style.width = '88%';
+            } else {
+                // Default to vitamin D
+                container.innerHTML = `
+                    <h2 class="section-title">Vitamin D Recommendations</h2>
+                    <div class="recommendation-cards">
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                                <div>
+                                    <h3>Vitamin D</h3>
+                                    <p>Essential for bone health and immune function</p>
+                                </div>
+                            </div>
+                            <p>Vitamin D helps your body absorb calcium and supports immune system function. Many people are deficient, especially in winter months.</p>
+                            
+                            <div class="food-list">
+                                <h4>Top Food Sources:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Fatty Fish (Salmon)</span>
+                                    <span class="food-amount">570 IU per 3oz</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Fortified Milk</span>
+                                    <span class="food-amount">120 IU per cup</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Egg Yolks</span>
+                                    <span class="food-amount">44 IU per egg</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Mushrooms</span>
+                                    <span class="food-amount">400 IU per 1/2 cup</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Nature Made Vitamin D3 2000 IU</p>
+                                <p class="supplement-dosage">Daily dosage: 1 softgel with a meal</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-bone"></i>
+                                </div>
+                                <div>
+                                    <h3>Calcium + D Combo</h3>
+                                    <p>For optimal bone health</p>
+                                </div>
+                            </div>
+                            <p>Vitamin D enhances calcium absorption. This combination is particularly important for women and older adults.</p>
+                            
+                            <div class="food-list">
+                                <h4>Calcium-Rich Foods:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Dairy Products</span>
+                                    <span class="food-amount">300mg per serving</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Leafy Greens</span>
+                                    <span class="food-amount">100-200mg per cup</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Almonds</span>
+                                    <span class="food-amount">75mg per oz</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Supplement Recommendation</h4>
+                                <p>Citracal Calcium + D3</p>
+                                <p class="supplement-dosage">Daily dosage: 2 tablets with food</p>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-card">
+                            <div class="card-header">
+                                <div class="nutrient-icon">
+                                    <i class="fas fa-cloud-sun"></i>
+                                </div>
+                                <div>
+                                    <h3>Sunlight Exposure</h3>
+                                    <p>Natural vitamin D production</p>
+                                </div>
+                            </div>
+                            <p>Your skin produces vitamin D when exposed to sunlight. The amount varies by skin tone, location, and season.</p>
+                            
+                            <div class="food-list">
+                                <h4>Optimal Exposure:</h4>
+                                <div class="food-item">
+                                    <span class="food-name">Fair Skin</span>
+                                    <span class="food-amount">10-15 mins midday</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Medium Skin</span>
+                                    <span class="food-amount">15-20 mins midday</span>
+                                </div>
+                                <div class="food-item">
+                                    <span class="food-name">Dark Skin</span>
+                                    <span class="food-amount">30+ mins midday</span>
+                                </div>
+                            </div>
+                            
+                            <div class="supplement-card">
+                                <h4>Important Note</h4>
+                                <p>During winter months or if you have limited sun exposure, supplementation is recommended.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                meter.style.width = '75%';
+            }
+        }
+
+        // Glow effect follow mouse
+        document.addEventListener('mousemove', (e) => {
+            const glow1 = document.querySelector('.glow-1');
+            const glow2 = document.querySelector('.glow-2');
+            glow1.style.left = `${e.clientX * 0.05}px`;
+            glow1.style.top = `${e.clientY * 0.05}px`;
+            glow2.style.right = `${window.innerWidth - e.clientX * 0.05}px`;
+            glow2.style.bottom = `${window.innerHeight - e.clientY * 0.05}px`;
+        });
+
+        // Animate health meter on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('nutritionScore').style.width = '75%';
+            }, 500);
+        });
+    </script>
+</body>
+</html>

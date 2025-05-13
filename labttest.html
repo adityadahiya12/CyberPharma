@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberPharma | Advanced Lab Testing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --electric-blue: #4a6bff;
+            --neon-cyan: #00f5d4;
+            --deep-midnight: #0a0f2e;
+            --soft-glitch: #8a9eff;
+            --cyber-white: #f0f4ff;
+            --pulse-pink: #ff3e9d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--deep-midnight) 0%, #1a1f4a 100%);
+            color: var(--cyber-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glow-effect {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--electric-blue) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .glow-1 { top: -50px; left: -50px; }
+        .glow-2 { bottom: -50px; right: -50px; background: radial-gradient(circle, var(--neon-cyan) 0%, transparent 70%); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--cyber-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--neon-cyan);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 107, 255, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 107, 255, 0.6);
+        }
+
+        /* HERO SECTION */
+        .lab-hero {
+            text-align: center;
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .lab-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--cyber-white), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lab-hero p {
+            font-size: 1.2rem;
+            color: rgba(240, 244, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* TEST CATEGORIES */
+        .test-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .category-card {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(74, 107, 255, 0.2);
+            background: rgba(138, 158, 255, 0.2);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-card p {
+            color: rgba(240, 244, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .test-list {
+            margin-top: 1rem;
+        }
+
+        .test-list li {
+            margin-bottom: 0.5rem;
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--neon-cyan);
+            margin-top: 1rem;
+        }
+
+        /* REPORT UPLOAD SECTION */
+        .report-upload {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 5rem 0;
+            text-align: center;
+            border: 1px dashed rgba(138, 158, 255, 0.4);
+        }
+
+        .report-upload h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--soft-glitch);
+            border-radius: 10px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--neon-cyan);
+            background: rgba(138, 158, 255, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            color: rgba(240, 244, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .upload-btn {
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            color: var(--deep-midnight);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* COMING SOON SECTION */
+        .coming-soon {
+            text-align: center;
+            margin: 5rem 0;
+        }
+
+        .coming-soon h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .feature-item h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .feature-item p {
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .soon-badge {
+            background: var(--pulse-pink);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* PRECAUTIONS SECTION */
+        .precautions {
+            background: rgba(138, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 5rem 0;
+        }
+
+        .precautions h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .precaution-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .precaution-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .precaution-icon {
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+            margin-top: 0.3rem;
+        }
+
+        .precaution-text h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .precaution-text p {
+            color: rgba(240, 244, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* PARTNER SECTION */
+        .partner {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+            border-bottom: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .partner p {
+            color: rgba(240, 244, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .partner a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .partner a:hover {
+            text-decoration: underline;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(138, 158, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--cyber-white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-cyan);
+            transform: translateY(-3px);
+        }
+
+        footer p {
+            color: rgba(240, 244, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .lab-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .test-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .report-upload {
+                padding: 2rem 1rem;
+            }
+
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-prescription-bottle-alt"></i>
+                <span>CyberPharma</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="pharm.html">Pharmacy</a></li>
+                    <li><a href="consult.html">Doctors</a></li>
+                    <li><a href="labttest.html">Lab Tests</a></li>
+                    <li><a href="bloging.html">Health Blog</a></li>
+                    <li><a href="vitamin.html">Basic Guide</a></li>
+                </ul>
+            </nav>
+            <button class="cta-button">Get Started</button>
+        </header>
+
+        <section class="lab-hero">
+            <h1>Precision Diagnostics<br>Powered by AI</h1>
+            <p>Get accurate lab results with our advanced testing facilities and AI-powered analysis. From routine checkups to specialized tests, we provide comprehensive diagnostics with cyber-speed efficiency.</p>
+            <button class="cta-button">Book a Test Now</button>
+        </section>
+
+        <section class="test-categories">
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-tint"></i>
+                </div>
+                <h3>Blood Tests</h3>
+                <p>Comprehensive blood analysis to monitor your health and detect potential issues.</p>
+                <ul class="test-list">
+                    <li>Complete Blood Count (CBC)</li>
+                    <li>Lipid Profile</li>
+                    <li>Blood Glucose</li>
+                    <li>Thyroid Function</li>
+                    <li>Vitamin D</li>
+                </ul>
+                <div class="price">Starting from ₹299</div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h3>Urine Tests</h3>
+                <p>Analyze kidney function, detect infections, and monitor metabolic conditions.</p>
+                <ul class="test-list">
+                    <li>Urinalysis</li>
+                    <li>Microalbuminuria</li>
+                    <li>24-Hour Urine Protein</li>
+                    <li>Urine Culture</li>
+                    <li>Pregnancy Test</li>
+                </ul>
+                <div class="price">Starting from ₹199</div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Organ Function</h3>
+                <p>Tests to evaluate the health and performance of your vital organs.</p>
+                <ul class="test-list">
+                    <li>Liver Function Test (LFT)</li>
+                    <li>Kidney Function Test (KFT)</li>
+                    <li>Cardiac Markers</li>
+                    <li>Pancreatic Function</li>
+                    <li>Thyroid Panel</li>
+                </ul>
+                <div class="price">Starting from ₹499</div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-dna"></i>
+                </div>
+                <h3>Specialized Tests</h3>
+                <p>Advanced diagnostics for specific conditions and genetic insights.</p>
+                <ul class="test-list">
+                    <li>HIV Test</li>
+                    <li>Hepatitis Panel</li>
+                    <li>COVID-19 RT-PCR</li>
+                    <li>Genetic Screening</li>
+                    <li>Allergy Testing</li>
+                </ul>
+                <div class="price">Starting from ₹799</div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-x-ray"></i>
+                </div>
+                <h3>Imaging Tests</h3>
+                <p>State-of-the-art imaging for accurate diagnosis and treatment planning.</p>
+                <ul class="test-list">
+                    <li>X-Ray</li>
+                    <li>CT Scan</li>
+                    <li>MRI</li>
+                    <li>Ultrasound</li>
+                    <li>ECG/EKG</li>
+                </ul>
+                <div class="price">Starting from ₹999</div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-vial"></i>
+                </div>
+                <h3>Wellness Packages</h3>
+                <p>Comprehensive health checkups tailored to your age and lifestyle.</p>
+                <ul class="test-list">
+                    <li>Basic Health Checkup</li>
+                    <li>Executive Health Package</li>
+                    <li>Women's Wellness</li>
+                    <li>Senior Citizen Package</li>
+                    <li>Diabetes Monitoring</li>
+                </ul>
+                <div class="price">Starting from ₹1499</div>
+            </div>
+        </section>
+
+        <section class="report-upload">
+            <h2>AI-Powered Report Analysis</h2>
+            <p>Upload your existing lab reports and our AI system will analyze them deeply, providing personalized insights, treatment recommendations, and lifestyle adjustments to improve your health.</p>
+            
+            <div class="upload-area">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">Drag & drop your lab reports here or click to browse files</div>
+                <div class="upload-text"><small>(Supports PDF, JPG, PNG up to 10MB)</small></div>
+                <button class="upload-btn">Upload Reports</button>
+            </div>
+
+            <p>Our system will provide you with:</p>
+            <ul style="text-align: left; max-width: 600px; margin: 1rem auto; color: rgba(240, 244, 255, 0.8);">
+                <li>Detailed analysis of all parameters</li>
+                <li>Personalized health recommendations</li>
+                <li>Diet and exercise plans</li>
+                <li>When to consult a doctor</li>
+                <li>Follow-up test suggestions</li>
+            </ul>
+        </section>
+
+        <section class="coming-soon">
+            <h2>Future Lab Testing Features</h2>
+            <p>We're constantly innovating to bring you the most advanced diagnostic solutions.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <span class="soon-badge">COMING SOON</span>
+                    <h3>Home Collection 2.0</h3>
+                    <p>Our trained phlebotomists will come to your location with smart kits that maintain perfect sample conditions.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <span class="soon-badge">COMING SOON</span>
+                    <h3>Instant Mobile Testing</h3>
+                    <p>Miniaturized lab equipment in our mobile units will provide results within minutes for common tests.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <span class="soon-badge">COMING SOON</span>
+                    <h3>Wearable Integration</h3>
+                    <p>Sync your smartwatch data with our platform for continuous health monitoring and early warnings.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <span class="soon-badge">COMING SOON</span>
+                    <h3>AR Sample Collection</h3>
+                    <p>Augmented Reality guidance for at-home sample collection with perfect technique every time.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="precautions">
+            <h2>Pre-Test Precautions</h2>
+            <p>For accurate test results, please follow these guidelines:</p>
+            
+            <div class="precaution-list">
+                <div class="precaution-item">
+                    <div class="precaution-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="precaution-text">
+                        <h3>Fasting Requirements</h3>
+                        <p>For blood glucose and lipid tests, fast for 8-12 hours. Drink only water during this period.</p>
+                    </div>
+                </div>
+                
+                <div class="precaution-item">
+                    <div class="precaution-icon">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                    </div>
+                    <div class="precaution-text">
+                        <h3>Medication Disclosure</h3>
+                        <p>Inform your technician about all medications and supplements you're currently taking.</p>
+                    </div>
+                </div>
+                
+                <div class="precaution-item">
+                    <div class="precaution-icon">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <div class="precaution-text">
+                        <h3>Hygiene Protocols</h3>
+                        <p>Maintain proper hand hygiene before sample collection to prevent contamination.</p>
+                    </div>
+                </div>
+                
+                <div class="precaution-item">
+                    <div class="precaution-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="precaution-text">
+                        <h3>Hydration</h3>
+                        <p>Drink adequate water before urine tests unless instructed otherwise by your doctor.</p>
+                    </div>
+                </div>
+                
+                <div class="precaution-item">
+                    <div class="precaution-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <div class="precaution-text">
+                        <h3>Avoid Strenuous Activity</h3>
+                        <p>Refrain from heavy exercise 24 hours before certain tests as it can affect results.</p>
+                    </div>
+                </div>
+                
+                <div class="precaution-item">
+                    <div class="precaution-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="precaution-text">
+                        <h3>Timing Matters</h3>
+                        <p>Some tests require specific timing (like hormonal tests) - follow your doctor's advice.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="partner">
+            <p>For more specialized tests and comprehensive health checkups, we partner with:</p>
+            <a href="https://www.lalpathlabs.com/" target="_blank">Lal PathLabs →</a>
+        </section>
+
+        <footer>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+            <p>© 2025 CyberPharma | The Future of Healthcare Diagnostics</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple animation for the upload area
+        const uploadArea = document.querySelector('.upload-area');
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'var(--neon-cyan)';
+            uploadArea.style.backgroundColor = 'rgba(0, 245, 212, 0.05)';
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = 'var(--soft-glitch)';
+            uploadArea.style.backgroundColor = 'transparent';
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'var(--soft-glitch)';
+            uploadArea.style.backgroundColor = 'transparent';
+            // Handle file upload here
+            alert('Files ready for upload! Our AI will analyze them shortly.');
+        });
+
+        // Glow effect follow mouse (optional)
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.querySelector('.glow-1');
+            glow.style.left = `${e.clientX * 0.05}px`;
+            glow.style.top = `${e.clientY * 0.05}px`;
+        });
+
+        // Simulate file upload button
+        document.querySelector('.upload-btn').addEventListener('click', () => {
+            alert('File upload dialog would open here in a production environment.');
+        });
+    </script>
+</body>
+</html>
