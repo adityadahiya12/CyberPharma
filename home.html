@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>CyberPharma | Next-Gen Pharmacy & Telehealth</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -315,32 +315,38 @@
         }
 
         /* Slideshow Styles */
-        .hero-image {
-          flex: 1;
-          position: relative;
-          border-radius: 20px;
-          overflow: hidden;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-          border: 2px solid rgba(138, 158, 255, 0.3);
-        }
+/* Hero Image Section - Replace existing styles */
+.hero-image {
+  flex: 1;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(138, 158, 255, 0.3);
+  min-height: 300px;
+  width: 100%;
+  aspect-ratio: 16/9;
+}
 
-        .slideshow-container {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          min-height: 400px;
-        }
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-        .slide {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background-size: cover;
-          background-position: center;
-          opacity: 0;
-          transition: opacity 1.5s ease-in-out;
-          border-radius: 20px;
-        }
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  border-radius: 20px;
+}
+
+
 
         .slide.active {
           opacity: 1;
@@ -1375,6 +1381,83 @@
         transition: none !important;
     }
 }
+/* Mobile Responsiveness - Add these new media queries */
+@media (max-width: 768px) {
+  .hero-image {
+    min-height: 250px;
+    order: -1;
+    margin-bottom: 2rem;
+  }
+  
+  .slide::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 15, 46, 0.5) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(10, 15, 46, 0.5) 100%
+    );
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-image {
+    min-height: 200px;
+    border-radius: 15px;
+  }
+}
+
+/* Stability Fixes - Add these new styles */
+.floating-buttons-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .floating-buttons-container {
+    gap: 10px;
+  }
+  
+  .emergency-floating-btn,
+  .chatbot-toggle {
+    transform: none !important;
+    animation: none !important;
+  }
+  
+  .emergency-floating-btn:hover,
+  .chatbot-toggle:hover {
+    transform: scale(1.05) !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Touch Action CSS */
+html, body {
+  touch-action: manipulation;
+}
+
+button, a {
+  touch-action: manipulation;
+}
 
 
     </style>
@@ -1713,6 +1796,56 @@
 <button aria-label="Open chat">...</button>
 
     <script>
+        // Add these new functions at the beginning of your script
+function stabilizeMobileLayout() {
+  if (window.innerWidth <= 768) {
+    document.querySelectorAll('.feature-card, .testimonial-card').forEach(card => {
+      card.style.transition = 'none';
+    });
+    
+    document.querySelectorAll('.glow-effect').forEach(glow => {
+      glow.style.display = 'none';
+    });
+  }
+}
+
+// Update your existing initSlideshow function
+function initSlideshow() {
+  const slides = document.querySelectorAll('.slide');
+  if (slides.length === 0) return;
+  
+  let currentSlide = 0;
+  let slideInterval;
+
+  function nextSlide() {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }
+
+  if (window.innerWidth > 768) {
+    slideInterval = setInterval(nextSlide, 8000);
+  }
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth <= 768) {
+      clearInterval(slideInterval);
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[0].classList.add('active');
+    } else if (!slideInterval) {
+      slideInterval = setInterval(nextSlide, 8000);
+    }
+  });
+}
+
+// Call these functions when the DOM loads
+document.addEventListener('DOMContentLoaded', function() {
+  stabilizeMobileLayout();
+  initSlideshow();
+  
+  // Add this resize listener
+  window.addEventListener('resize', stabilizeMobileLayout);
+});
         // Enhanced animations and interactions
         document.addEventListener('DOMContentLoaded', function() {
             // Emergency Button Functionality
